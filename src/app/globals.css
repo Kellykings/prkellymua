@@ -1,0 +1,114 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* 60% Primary Reading Canvas (Alabaster & Pure Paper) */
+  --color-surface-light: #F8F9F8;
+  --color-surface-paper: #F2F4F3;
+  --color-surface-card: #FFFFFF;
+  --color-surface-border: #DCE1DF;
+
+  /* 30% Structural Authority (Sovereign Navy & Deep Ink) */
+  --color-primary-navy: #0E1E28;
+  --color-secondary-navy: #142936;
+  --color-text-main: #111B21;
+  --color-text-muted: #52626D;
+
+  /* 10% Precision Accent (Champagne Gold on Dark, Deep Bronze on Light for >= 4.5:1 WCAG Contrast) */
+  --color-accent-gold: #C8A86B;
+  --color-accent-gold-ink: #7A5A1A;
+  --color-accent-bronze: #7A5A1A;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+/* Accessible Keyboard Navigation Rings (WCAG 2.2 AA) */
+:focus-visible {
+  outline: 2px solid #C8A86B;
+  outline-offset: 2px;
+}
+
+body {
+  background-color: var(--color-surface-light);
+  color: var(--color-text-main);
+  font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  min-height: 100dvh;
+  letter-spacing: 0;
+  line-height: 1.6;
+}
+
+@layer utilities {
+  /* Safe Area Insets for Modern Mobile Edge-to-Edge Displays */
+  .pb-safe {
+    padding-bottom: max(1rem, env(safe-area-inset-bottom));
+  }
+  .pt-safe {
+    padding-top: max(1rem, env(safe-area-inset-top));
+  }
+
+  /* FAANG / Apple HIG Touch Target Ergonomics */
+  .touch-target {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  .touch-target-lg {
+    min-height: 48px;
+    min-width: 48px;
+  }
+
+  /* Mobile Momentum Horizontal Scrolling */
+  .smooth-scroll-x {
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
+  }
+
+  /* Editorial Section Kicker — clean Inter label spec (12px, uppercase, tracking 0.08em) */
+  .editorial-kicker {
+    @apply inline-flex items-center gap-2.5 text-xs font-semibold uppercase tracking-[0.08em];
+    color: var(--color-accent-bronze);
+  }
+  .editorial-kicker::before {
+    content: "";
+    @apply inline-block w-4 h-[1.5px] shrink-0;
+    background-color: var(--color-accent-bronze);
+  }
+
+  .editorial-kicker-dark {
+    @apply inline-flex items-center gap-2.5 text-xs font-semibold uppercase tracking-[0.08em] text-gold-400;
+  }
+  .editorial-kicker-dark::before {
+    content: "";
+    @apply inline-block w-4 h-[1.5px] bg-gold-400 shrink-0;
+  }
+
+  /* Hide scrollbars on mobile horizontal filter strips while keeping scrollability */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
