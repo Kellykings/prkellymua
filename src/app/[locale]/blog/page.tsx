@@ -6,6 +6,90 @@ import { getBlogPosts } from '@/lib/data/repository';
 import { formatCategory, formatDate, t } from '@/lib/utils';
 import type { Locale } from '@/types/domain';
 
+function renderWithAbbr(text: string, locale: Locale) {
+  const acronyms: Record<string, { en: string; fr: string }> = {
+    ATIDI: {
+      en: 'African Trade & Investment Development Insurance',
+      fr: 'Agence pour l’Assurance du Commerce en Afrique (ATIDI)',
+    },
+    MINFI: {
+      en: 'Ministry of Finance (Cameroon)',
+      fr: 'Ministère des Finances (Cameroun)',
+    },
+    ENAM: {
+      en: 'National School of Administration and Magistracy (Yaoundé)',
+      fr: 'École Nationale d’Administration et de Magistrature (Yaoundé)',
+    },
+    BEAC: {
+      en: 'Bank of Central African States',
+      fr: 'Banque des États de l’Afrique Centrale',
+    },
+    COSUMAF: {
+      en: 'Central African Financial Market Surveillance Commission',
+      fr: 'Commission de Surveillance du Marché Financier de l’Afrique Centrale',
+    },
+    BVMAC: {
+      en: 'Central African Unified Stock Exchange',
+      fr: 'Bourse des Valeurs Mobilières de l’Afrique Centrale (BVMAC)',
+    },
+    CEMAC: {
+      en: 'Central African Economic and Monetary Community',
+      fr: 'Communauté Économique et Monétaire de l’Afrique Centrale',
+    },
+    TSA: {
+      en: 'Treasury Single Account',
+      fr: 'Compte Unique du Trésor (CUT)',
+    },
+    CUT: {
+      en: 'Compte Unique du Trésor',
+      fr: 'Compte Unique du Trésor',
+    },
+    PFM: {
+      en: 'Public Financial Management',
+      fr: 'Gestion des Finances Publiques (GFP)',
+    },
+    GFP: {
+      en: 'Gestion des Finances Publiques',
+      fr: 'Gestion des Finances Publiques',
+    },
+    'UNDP-GEF': {
+      en: 'United Nations Development Programme – Global Environment Facility',
+      fr: 'Programme des Nations Unies pour le Développement – Fonds pour l’Environnement Mondial (PNUD-FEM)',
+    },
+    'PNUD-FEM': {
+      en: 'Programme des Nations Unies pour le Développement – Fonds pour l’Environnement Mondial',
+      fr: 'Programme des Nations Unies pour le Développement – Fonds pour l’Environnement Mondial',
+    },
+    IFMIS: {
+      en: 'Integrated Financial Management Information System',
+      fr: 'Système Intégré de Gestion des Finances Publiques (SIGFIP)',
+    },
+    ESG: {
+      en: 'Environmental, Social, and Governance',
+      fr: 'Environnemental, Social et de Gouvernance (ESG)',
+    },
+  };
+
+  const regex = /(ATIDI|MINFI|ENAM|BEAC|COSUMAF|BVMAC|CEMAC|TSA|CUT|PFM|GFP|UNDP-GEF|PNUD-FEM|IFMIS|ESG)/g;
+  const parts = text.split(regex);
+
+  return parts.map((part, index) => {
+    const acronymData = acronyms[part];
+    if (acronymData) {
+      return (
+        <abbr
+          key={index}
+          title={acronymData[locale]}
+          className="no-underline cursor-help border-b border-dotted border-current/50 hover:border-bronze-600 transition-colors"
+        >
+          {part}
+        </abbr>
+      );
+    }
+    return part;
+  });
+}
+
 export async function generateMetadata({
   params,
 }: {
@@ -15,8 +99,8 @@ export async function generateMetadata({
 
   const title =
     locale === 'fr'
-      ? 'Notes de Politique & Laboratoire d’Idées | Pr Kelly Mua Kingsly'
-      : 'Policy Briefs & Thought Leadership | Professor Kelly Mua Kingsly';
+      ? 'Notes de Politique & Travaux de Recherche | Pr Kelly Mua Kingsly'
+      : 'Policy Briefs & Working Papers | Professor Kelly Mua Kingsly';
 
   const description =
     locale === 'fr'
@@ -93,8 +177,8 @@ export default async function BlogIndexPage({
     '@type': 'Blog',
     name:
       locale === 'fr'
-        ? 'Laboratoire d’Idées & Notes de Politique — Pr Kelly Mua Kingsly'
-        : 'Thought Leadership & Policy Briefs — Professor Kelly Mua Kingsly',
+        ? 'Notes de Politique & Travaux de Recherche — Pr Kelly Mua Kingsly'
+        : 'Policy Briefs & Sovereign Working Papers — Professor Kelly Mua Kingsly',
     description:
       locale === 'fr'
         ? 'Publications analytiques et notes d’orientation rédigées par le Professeur Kelly Mua Kingsly'
@@ -127,18 +211,18 @@ export default async function BlogIndexPage({
       <div className="max-w-3xl space-y-4">
         <div className="editorial-kicker">
           {locale === 'fr'
-            ? 'LABORATOIRE D’IDÉES & NOTES DE POLITIQUE'
-            : 'THOUGHT LEADERSHIP & POLICY BRIEFS'}
+            ? 'NOTES DE POLITIQUE & TRAVAUX DE RECHERCHE'
+            : 'POLICY BRIEFS & SOVEREIGN WORKING PAPERS'}
         </div>
         <h1 className="text-3xl sm:text-4xl lg:text-[2.5rem] font-serif font-semibold text-navy-900 leading-[1.15]">
           {locale === 'fr'
-            ? 'Analyses Économiques, Marchés de la CEMAC & Audit Souverain'
-            : 'Economic Commentary, CEMAC Capital Markets & Sovereign Audit'}
+            ? 'Recherche Appliquée & Notes d’Orientation des Politiques Publiques'
+            : 'Applied Research & Sovereign Policy Briefs'}
         </h1>
         <p className="text-ink-700 text-base sm:text-[17px] leading-relaxed">
           {locale === 'fr'
-            ? 'Publications analytiques et notes d’orientation rédigées par le Professeur Kelly Mua Kingsly à destination des décideurs publics, chercheurs et investisseurs institutionnels.'
-            : 'Open-access policy briefs, empirical working papers, and institutional commentary authored by Professor Kelly Mua Kingsly.'}
+            ? 'Travaux de recherche empirique en libre accès, notes d’orientation et analyses techniques sur la gestion des finances publiques, les marchés de capitaux de la CEMAC et l’audit judiciaire.'
+            : 'Open-access empirical research, working papers, and technical commentary on public financial management, CEMAC capital markets, and forensic governance.'}
         </p>
       </div>
 
@@ -263,12 +347,12 @@ export default async function BlogIndexPage({
                     href={`/${locale}/blog/${post.slug}`}
                     className="hover:text-bronze-600 transition-colors"
                   >
-                    {t(post.title, locale)}
+                    {renderWithAbbr(t(post.title, locale), locale)}
                   </Link>
                 </h2>
 
                 <p className="text-ink-700 text-sm sm:text-base leading-relaxed">
-                  {t(post.excerpt, locale)}
+                  {renderWithAbbr(t(post.excerpt, locale), locale)}
                 </p>
               </div>
 
@@ -320,6 +404,40 @@ export default async function BlogIndexPage({
           </Link>
         </div>
       )}
+
+      {/* Institutional Cross-Pathways Bar */}
+      <section className="bg-surface-paper border border-surface-border p-6 sm:p-8 rounded-sm space-y-4">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div>
+            <h3 className="font-serif font-bold text-lg text-navy-900">
+              {locale === 'fr'
+                ? 'Traités Académiques & Piliers d’Autorité'
+                : 'Scholarly Treatises & Technical Pillars'}
+            </h3>
+            <p className="text-xs sm:text-sm text-ink-600 mt-1">
+              {locale === 'fr'
+                ? 'Pour approfondir les fondements théoriques et les applications opérationnelles de ces notes de recherche.'
+                : 'Explore the full monographic treatises and operational statecraft pillars underpinning these policy briefs.'}
+            </p>
+          </div>
+          <div className="flex flex-wrap items-center gap-3 shrink-0">
+            <Link
+              href={`/${locale}/books`}
+              className="inline-flex items-center gap-2 px-4 py-2 bg-navy-900 hover:bg-navy-800 text-gold-300 font-semibold text-xs transition-colors rounded-sm"
+            >
+              <span>{locale === 'fr' ? 'Catalogue des 10 Traités' : 'Catalog of 10 Treatises'}</span>
+              <ArrowRight className="w-3.5 h-3.5" aria-hidden="true" />
+            </Link>
+            <Link
+              href={`/${locale}/expertise`}
+              className="inline-flex items-center gap-2 px-4 py-2 bg-white hover:bg-surface-paper border border-surface-border text-navy-900 font-semibold text-xs transition-colors rounded-sm"
+            >
+              <span>{locale === 'fr' ? 'Piliers d’Expertise' : 'Technical Pillars'}</span>
+              <ArrowRight className="w-3.5 h-3.5" aria-hidden="true" />
+            </Link>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }

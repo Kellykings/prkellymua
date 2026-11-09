@@ -31,6 +31,7 @@ const EMPTY_STORE = {
   media: [],
   gallery: [],
   inquiries: [],
+  orders: [],
   deletedIds: {
     books: [],
     blog: [],
@@ -38,6 +39,7 @@ const EMPTY_STORE = {
     media: [],
     gallery: [],
     inquiries: [],
+    orders: [],
   },
 };
 
@@ -349,6 +351,71 @@ describe('Admin Security, Passkey Auth & Validation Engine', () => {
       });
       const camelRes = await contactPOST(camelReq);
       expect(camelRes.status).toBe(200);
+    });
+
+    it('validates contact submissions against whitespace, invalid email, bounds, and honeypot', async () => {
+      const { POST: contactPOST } = await import('@/app/api/contact/route');
+
+      // Whitespace only
+      const wsReq = new Request('http://localhost:3000/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          senderName: '   ',
+          senderEmail: 'valid@example.org',
+          subject: 'Valid Subject',
+          message: 'This is a valid test message.',
+        }),
+      });
+      const wsRes = await contactPOST(wsReq);
+      expect(wsRes.status).toBe(400);
+
+      // Invalid email
+      const badEmailReq = new Request('http://localhost:3000/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          senderName: 'Valid Name',
+          senderEmail: 'not-an-email',
+          subject: 'Valid Subject',
+          message: 'This is a valid test message.',
+        }),
+      });
+      const badEmailRes = await contactPOST(badEmailReq);
+      expect(badEmailRes.status).toBe(400);
+      const badEmailJson = await badEmailRes.json();
+      expect(badEmailJson.error).toContain('valid institutional email');
+
+      // Short message (< 10 chars)
+      const shortMsgReq = new Request('http://localhost:3000/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          senderName: 'Valid Name',
+          senderEmail: 'valid@example.org',
+          subject: 'Valid Subject',
+          message: 'Hi',
+        }),
+      });
+      const shortMsgRes = await contactPOST(shortMsgReq);
+      expect(shortMsgRes.status).toBe(400);
+
+      // Honeypot silently accepted
+      const hpReq = new Request('http://localhost:3000/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          senderName: 'Bot Name',
+          senderEmail: 'bot@example.org',
+          subject: 'Bot Spam',
+          message: 'Spam message content.',
+          protocol_hp: 'i am a bot',
+        }),
+      });
+      const hpRes = await contactPOST(hpReq);
+      expect(hpRes.status).toBe(200);
+      const hpJson = await hpRes.json();
+      expect(hpJson.ok).toBe(true);
     });
 
     it('validates Stripe webhook signature when secret is configured', async () => {

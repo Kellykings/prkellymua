@@ -22,7 +22,10 @@ import { AdminGovernanceSection } from '@/components/admin/AdminGovernanceSectio
 import { AdminMediaSection } from '@/components/admin/AdminMediaSection';
 import { AdminGallerySection } from '@/components/admin/AdminGallerySection';
 import { AdminInquiriesSection } from '@/components/admin/AdminInquiriesSection';
+import { AdminOrdersSection } from '@/components/admin/AdminOrdersSection';
 import { AdminSystemSection } from '@/components/admin/AdminSystemSection';
+import { AdminGuideSection } from '@/components/admin/AdminGuideSection';
+import type { PrintDeliveryOrder } from '@/types/domain';
 
 export const metadata: Metadata = {
   title: 'Editorial & Governance Studio | Prof. Kelly Mua Kingsly',
@@ -88,6 +91,8 @@ export default async function AdminStudioPage({
     initialSubmissions = getCustomEntityItems('inquiries');
   }
 
+  const initialOrders = getCustomEntityItems<PrintDeliveryOrder>('orders');
+
   return (
     <div className="min-h-screen bg-sand-50/50 text-ink-900 pb-16">
       <AdminHeader />
@@ -99,6 +104,7 @@ export default async function AdminStudioPage({
           governance: careers.length,
           media: media.length,
           gallery: photos.length,
+          orders: initialOrders.length,
         }}
       />
 
@@ -115,6 +121,8 @@ export default async function AdminStudioPage({
         )}
 
         {activeTab === 'books' && <AdminBooksSection books={books} />}
+
+        {activeTab === 'orders' && <AdminOrdersSection initialOrders={initialOrders} />}
 
         {activeTab === 'blog' && <AdminBlogSection posts={posts} />}
 
@@ -137,6 +145,13 @@ export default async function AdminStudioPage({
 
         {activeTab === 'system' && (
           <AdminSystemSection
+            isSupabaseConfigured={isSupabaseConfigured}
+            storeHealth={getContentStoreHealth()}
+          />
+        )}
+
+        {activeTab === 'guide' && (
+          <AdminGuideSection
             isSupabaseConfigured={isSupabaseConfigured}
             storeHealth={getContentStoreHealth()}
           />

@@ -34,7 +34,7 @@ export async function generateMetadata({
       'ATIDI Board Chair',
       'MINFI Director Finance Operations',
       'COSUMAF Cameroon',
-      'BEAC Censorship',
+      'BEAC Supervisory Censorate',
       'UNDP-GEF Green Bond Initiative',
       'Harvard Kennedy School MPA',
       'Forensic Accounting Cameroon',

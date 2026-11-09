@@ -191,3 +191,38 @@ export interface InstitutionalEvent {
   related_gallery_ids?: string[];
 }
 
+export type OrderFulfillmentStatus =
+  | 'pending_verification'
+  | 'payment_confirmed'
+  | 'dispatched'
+  | 'delivered'
+  | 'cancelled';
+
+export type LocalPaymentMethod = 'momo' | 'orange_money' | 'cash_delivery' | 'card';
+
+export interface PrintDeliveryOrder {
+  id: string;
+  order_number: string;
+  book_id: string;
+  book_title: string;
+  book_slug: string;
+  format: string;
+  format_sku: string;
+  quantity: number;
+  unit_price_cents: number;
+  unit_price_xaf: number;
+  total_price_xaf: number;
+  customer_name: string;
+  customer_email: string;
+  customer_phone: string;
+  delivery_city: string;
+  delivery_address: string;
+  delivery_notes?: string;
+  payment_method: LocalPaymentMethod;
+  payment_reference: string;
+  status: OrderFulfillmentStatus;
+  admin_notes?: string;
+  created_at: string;
+  updated_at?: string;
+}
+

@@ -11,6 +11,9 @@ import {
   CheckCircle2,
   Pin,
   ExternalLink,
+  BookMarked,
+  PackageCheck,
+  Receipt,
 } from 'lucide-react';
 import type { Book, BlogPost, CareerEntry, MediaAppearance } from '@/types/domain';
 
@@ -207,12 +210,37 @@ export function AdminOverviewSection({
               <span>Content Security Policy (CSP) allowlist for YouTube video embeds.</span>
             </div>
           </div>
-          <div className="pt-2 flex items-center gap-3 text-xs">
+          <div className="pt-2 flex flex-wrap items-center gap-3 text-xs">
             <Link
               href="/admin?tab=system"
               className="px-3 py-1.5 bg-gold-500 hover:bg-gold-400 text-navy-950 font-bold transition-colors"
             >
               Inspect Diagnostics
+            </Link>
+            <Link
+              href="/admin?tab=orders"
+              className="px-3 py-1.5 bg-navy-950 border border-gold-500/40 hover:border-gold-400 text-gold-400 font-semibold transition-colors flex items-center gap-1.5"
+            >
+              <PackageCheck className="w-3.5 h-3.5" />
+              <span>Fulfillment Hub</span>
+            </Link>
+            <a
+              href="https://www.sokoclick.com/en/sales/new"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-3 py-1.5 bg-navy-950 border border-gold-500/40 hover:border-gold-400 text-gold-400 font-semibold transition-colors flex items-center gap-1.5"
+              title="Issue SokoClick Sales Receipt & POS Sale"
+            >
+              <Receipt className="w-3.5 h-3.5" />
+              <span>SokoClick Receipts</span>
+              <ExternalLink className="w-3 h-3 opacity-70" />
+            </a>
+            <Link
+              href="/admin?tab=guide"
+              className="px-3 py-1.5 bg-navy-950 border border-white/20 hover:border-gold-400 text-slate-200 font-semibold transition-colors flex items-center gap-1.5"
+            >
+              <BookMarked className="w-3.5 h-3.5" />
+              <span>Operations Manual</span>
             </Link>
             <Link
               href="/en/legal/disclaimer"

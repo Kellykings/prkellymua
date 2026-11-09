@@ -23,21 +23,21 @@ export const EXECUTIVE_PROFILE = {
     wikipedia: 'https://en.wikipedia.org/wiki/Kelly_Mua_Kingsly',
   },
   shortBio: {
-    en: 'Professor Kelly Mua Kingsly is a global leader with 25+ years’ expertise across finance, infrastructure, ESG, climate policy, and transversal engineering. He serves as Director of Finance Operations of the State at the Ministry of Finance (Cameroon), Board Chair of the African Trade & Investment Development Insurance (ATIDI), Designated National Authority for the UNDP-GEF Global Green Bond Initiative, Founding Board Member of Global Banking & Markets (GBM), and Senior Lecturer at ENAM.',
-    fr: 'Le Professeur Kelly Mua Kingsly est un haut dirigeant international fort de plus de 25 ans d’expérience en finance publique, infrastructures, ESG, finance climat et ingénierie financière. Il exerce les fonctions de Directeur des Opérations Financières de l’État au Ministère des Finances (Cameroun), Président du Conseil d’Administration d’ATIDI, Autorité Nationale Désignée pour les Obligations Vertes (PNUD-FEM), Membre Fondateur de Global Banking & Markets (GBM) et Enseignant-Chercheur à l’ENAM.',
+    en: 'Professor Kelly Mua Kingsly (PhD, CFA) is a finance engineer, public finance executive, and climate finance specialist with more than twenty-five years of service spanning sovereign treasury administration, multilateral risk governance, and forensic accounting. He serves as Director of State Finance Operations at the Ministry of Finance of Cameroon, Chairman of the Board of Directors of the African Trade & Investment Development Insurance (ATIDI), and Senior Lecturer at the École Nationale d’Administration et de Magistrature (ENAM).',
+    fr: 'Le Professeur Kelly Mua Kingsly (PhD, CFA) est un ingénieur financier, haut dirigeant des finances publiques et spécialiste de la finance climat comptant plus de vingt-cinq années de service au confluent de la trésorerie souveraine, de la gouvernance multilatérale des risques et de l’audit judiciaire. Il exerce les fonctions de Directeur des Opérations Financières de l’État au Ministère des Finances du Cameroun, Président du Conseil d’Administration de l’ATIDI et Enseignant-Chercheur à l’ENAM.',
   },
   fullBioParagraphs: [
     {
-      en: 'Across more than two and a half decades at the intersection of sovereign treasury management, multilateral development operations, and academic research, Professor Kelly Mua Kingsly has shaped fiscal modernization, capital-market integration, and climate-resilient debt instruments across Central and Sub-Saharan Africa.',
-      fr: 'Depuis plus de deux décennies et demie à la croisée de la gestion de la trésorerie souveraine, des opérations de développement multilatéral et de la recherche académique, le Professeur Kelly Mua Kingsly façonne la modernisation budgétaire, l’intégration des marchés de capitaux et les instruments de financement durable en Afrique.',
+      en: 'Across more than two decades in public financial management, Professor Kingsly has overseen state finance operations, fiscal dashboard consolidation (TOFE), public debt structuring, and sovereign securities issuances (BTA/OTA). His regulatory service includes eight years as Cameroon’s Designated Institutional Representative to the Central African Financial Market Surveillance Commission (COSUMAF) and statutory central bank supervisory censor duties at the Bank of Central African States (BEAC).',
+      fr: 'Depuis plus de deux décennies dans la gestion des finances publiques, le Professeur Kingsly supervise les opérations financières de l’État, la centralisation du Tableau des Opérations Financières de l’État (TOFE), la structuration de la dette publique et l’émission des titres souverains (BTA/OTA). Son service réglementaire comprend huit années en qualité de Représentant Institutionnel Désigné du Cameroun auprès de la COSUMAF et l’exercice du censorat statutaire à la Banque des États de l’Afrique Centrale (BEAC).',
     },
     {
-      en: 'Within the public financial architecture of Cameroon and the CEMAC region, his statutory leadership encompasses directing state finance operations (monitoring public revenue/expenditure and TOFE), sovereign debt issuances (OTA/BTA), central bank censorship at BEAC, and regulatory oversight as Cameroon’s Designated Representative to COSUMAF for over eight years.',
-      fr: 'Au sein de l’architecture financière publique du Cameroun et de la CEMAC, son autorité statutaire englobe la direction des opérations financières de l’État (suivi des recettes/dépenses et TOFE), les émissions obligataires souveraines (OTA/BTA), le censorat à la BEAC et la régulation du marché financier auprès de la COSUMAF pendant plus de huit ans.',
+      en: 'In international development, he completed nearly seventeen years of fiduciary leadership as Deputy Resident Representative for Operations with the United Nations Development Programme (UNDP). As Board Chair of ATIDI, he steers governance across a constituency of 24 sovereign African member states, presiding over commercial credit and political risk portfolios that have supported over $85 billion in trade and investment flows across the continent.',
+      fr: 'Dans le champ du développement international, il a exercé près de dix-sept années de direction fiduciaire en tant que Représentant Résident Adjoint chargé des Opérations au Programme des Nations Unies pour le Développement (PNUD). En tant que Président du Conseil d’Administration d’ATIDI, il pilote la gouvernance d’une circonscription de 24 États membres souverains africains, supervisant des portefeuilles d’assurance-crédit commercial et d’assurance des risques politiques ayant mobilisé plus de 85 milliards de dollars d’échanges et d’investissements.',
     },
     {
-      en: 'A seasoned multilateral executive, he served 16 years as Deputy Resident Representative for Operations at the United Nations Development Programme (UNDP), bringing rigorous fiduciary and IPSAS discipline to international cooperation. He currently chairs the Board of Directors of ATIDI, presiding over multilateral credit insurance portfolios that have mobilized over $85B in cumulative trade and investment flows across 24 sovereign member states.',
-      fr: 'Dirigeant multilatéral chevronné, il a officié pendant 16 ans comme Représentant Résident Adjoint chargé des Opérations au PNUD, insufflant une rigueur fiduciaire et IPSAS exemplaire. Il préside actuellement le Conseil d’Administration de l’ATIDI, supervisant des garanties et assurances-crédit qui ont mobilisé plus de 85 milliards de dollars de flux d’échanges à travers 24 États membres souverains.',
+      en: 'An alumnus of Harvard University’s John F. Kennedy School of Government (MPA) with doctorates in public policy and forensic accounting, Professor Kingsly has authored ten published monographic treatises on financial crime, fraud risk matrices, and public expenditure integrity. At ENAM in Yaoundé, he trains senior civil servants, state auditors, and financial magistrates in evidentiary rigor, public accounting ethics, and capital market stewardship.',
+      fr: 'Diplômé de la John F. Kennedy School of Government de Harvard University (MPA) et titulaire de doctorats en politiques publiques et comptabilité judiciaire, le Professeur Kingsly est l’auteur de dix traités monographiques sur la criminalité financière, les matrices de risque de fraude et l’intégrité des dépenses publiques. À l’ENAM de Yaoundé, il forme hauts fonctionnaires, auditeurs d’État et magistrats financiers à la rigueur probatoire, à l’éthique de la comptabilité publique et aux marchés de capitaux.',
     },
   ],
   transversalCompetencies: [
@@ -362,7 +362,7 @@ export const CAREER_ENTRIES: CareerEntry[] = [
       fr: 'BEAC / CPC-TP (Banque des États de l’Afrique Centrale)',
     },
     role_title: {
-      en: 'Censor & Public Treasury Securities Surveillance Member',
+      en: 'Supervisory Censor & Public Securities Oversight Member',
       fr: 'Censeur & Suivi des Émissions de Titres Publics',
     },
     category: 'sovereign',
@@ -1125,8 +1125,8 @@ export const EXPERTISE_PILLARS: ExpertisePillar[] = [
     },
     key_mandates: [
       {
-        en: 'Author of four specialized volumes on forensic accounting, fraud symptoms, and AML',
-        fr: 'Auteur de quatre ouvrages spécialisés sur l’audit judiciaire, les signaux de fraude et la LCB-FT',
+        en: 'Author of four specialized volumes on forensic accounting, fraud symptoms, and AML (within 10 published treatises)',
+        fr: 'Auteur de quatre volumes spécialisés en audit judiciaire, signaux de fraude et LCB-FT (au sein de 10 traités publiés)',
       },
       {
         en: 'Graduate instruction for state auditors and financial magistrates at ENAM',
@@ -1134,8 +1134,8 @@ export const EXPERTISE_PILLARS: ExpertisePillar[] = [
       },
     ],
     metrics_label: {
-      en: '4 Published Reference Volumes',
-      fr: '4 Ouvrages de Référence Publiés',
+      en: '4 Specialized Volumes · 10 Treatises Opus',
+      fr: '4 Volumes Spécialisés · Corpus de 10 Traités',
     },
   },
   {
@@ -1322,6 +1322,13 @@ export const SEED_BOOKS: Book[] = [
       },
     ],
     third_party_retailers: [
+      {
+        id: 'ret-amazon-credible-sig',
+        book_id: 'book-credible-signature-paul-biya',
+        platform_name: 'Amazon (Kindle & Paperback)',
+        retail_url: 'https://www.amazon.com/ART-CREDIBLE-SIGNATURE-PAUL-BIYA-ebook/dp/B0HPMP8BQZ',
+        is_active: true,
+      },
       {
         id: 'ret-yaounde-launch-desk',
         book_id: 'book-credible-signature-paul-biya',
@@ -2772,7 +2779,7 @@ export const MEDIA_APPEARANCES: MediaAppearance[] = [
     venue: '237 Actu · Dossier Spécial Économie',
     date: '2022-04-04',
     location: 'Yaoundé, Cameroon',
-    image_url: '/images/gallery/prof-kelly-diplomatic-portrait.png',
+    image_url: '/images/photos/photo8.jpeg',
     summary: {
       en: 'Detailed national press portrait tracing Prof. Kingsly’s high-level career across state treasury operations, central bank regulatory censorship (BEAC), regional market oversight (COSUMAF), and scholarly authorship in forensic accounting and public management.',
       fr: 'Grand portrait de la presse nationale retraçant la carrière de haut niveau du Pr Kingsly entre la Direction générale du Trésor, le censorat de la BEAC, la supervision financière (COSUMAF) et ses travaux académiques de référence en audit judiciaire.',
@@ -2795,7 +2802,7 @@ export const MEDIA_APPEARANCES: MediaAppearance[] = [
     venue: 'AFSIC – Investing in Africa (London, United Kingdom)',
     date: '2024-10-08',
     location: 'London, United Kingdom / International',
-    image_url: '/images/gallery/sovereign-debt-summit.jpg',
+    image_url: '/images/photos/photo11.jpeg',
     summary: {
       en: 'Official institutional speaker registry for Europe’s premier Africa investment forum, detailing Prof. Kingsly’s mandates as Director of Finance Operations of the State, ATIDI Board Director, BEAC Censor, and pioneer in sovereign debt de-risking.',
       fr: 'Notice officielle d’intervenant au premier sommet d’investissement européen dédié à l’Afrique, détaillant ses fonctions de Directeur des Opérations Financières de l’État, administrateur de l’ATIDI, censeur de la BEAC et pionnier du dé-risquage souverain.',
@@ -2975,7 +2982,7 @@ export const MEDIA_APPEARANCES: MediaAppearance[] = [
     venue: 'The Nkafu Policy Institute · Denis & Lenora Foretia Foundation',
     date: 'Reference Series',
     location: 'Yaoundé, Cameroon',
-    image_url: '/images/gallery/state-trust-capital-symposium.jpg',
+    image_url: '/images/photos/photo12.jpeg',
     summary: {
       en: 'Policy institute fellowship dossier highlighting Prof. Kingsly’s research contributions to sovereign debt sustainability, state financial operations, African Development Bank advisory engagements, and governance reforms across Central and West Africa.',
       fr: 'Dossier d’expertise du think tank Nkafu mettant en lumière les travaux du Pr Kingsly sur la soutenabilité de la dette souveraine, la gestion financière publique, ses missions pour la BAD et les réformes de gouvernance en Afrique centrale et de l’Ouest.',

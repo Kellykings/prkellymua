@@ -28,6 +28,58 @@ import {
 } from '@/lib/utils';
 import type { Locale } from '@/types/domain';
 
+function renderHeroSubheadlineWithAbbr(text: string, locale: Locale) {
+  const acronyms: Record<string, { en: string; fr: string }> = {
+    ATIDI: {
+      en: 'African Trade & Investment Development Insurance',
+      fr: 'Agence pour l’Assurance du Commerce en Afrique (ATIDI)',
+    },
+    'UNDP-EU': {
+      en: 'United Nations Development Programme – European Union',
+      fr: 'Programme des Nations Unies pour le Développement – Union Européenne',
+    },
+    'PNUD-UE': {
+      en: 'Programme des Nations Unies pour le Développement – Union Européenne',
+      fr: 'Programme des Nations Unies pour le Développement – Union Européenne',
+    },
+    UNCTAD: {
+      en: 'United Nations Conference on Trade and Development',
+      fr: 'Conférence des Nations Unies sur le Commerce et le Développement (CNUCED)',
+    },
+    CNUCED: {
+      en: 'Conférence des Nations Unies sur le Commerce et le Développement (CNUCED)',
+      fr: 'Conférence des Nations Unies sur le Commerce et le Développement',
+    },
+    'BEAC-CPC-TP': {
+      en: 'Bank of Central African States – Public Securities Settlement and Custody Unit',
+      fr: 'Banque des États de l’Afrique Centrale – Cellule de Règlement et de Conservation des Titres Publics',
+    },
+    COSUMAF: {
+      en: 'Central African Financial Market Surveillance Commission',
+      fr: 'Commission de Surveillance du Marché Financier de l’Afrique Centrale',
+    },
+  };
+
+  const regex = /(ATIDI|UNDP-EU|PNUD-UE|UNCTAD|CNUCED|BEAC-CPC-TP|COSUMAF)/g;
+  const parts = text.split(regex);
+
+  return parts.map((part, index) => {
+    const acronymData = acronyms[part];
+    if (acronymData) {
+      return (
+        <abbr
+          key={index}
+          title={acronymData[locale]}
+          className="no-underline cursor-help border-b border-dotted border-white/40 hover:border-gold-400 transition-colors"
+        >
+          {part}
+        </abbr>
+      );
+    }
+    return part;
+  });
+}
+
 export default async function HomePage({
   params,
 }: {
@@ -73,9 +125,7 @@ export default async function HomePage({
             {/* Primary Narrative Column (7/12) */}
             <div className="lg:col-span-7 space-y-6">
               <div className="editorial-kicker-dark">
-                {locale === 'fr'
-                  ? 'FINANCES PUBLIQUES · GOUVERNANCE · RECHERCHE'
-                  : 'PUBLIC FINANCE · GOVERNANCE · SCHOLARSHIP'}
+                {dict.hero.eyebrow}
               </div>
 
               <h1 className="text-3xl sm:text-4xl lg:text-[2.75rem] xl:text-[3.25rem] font-serif font-semibold tracking-normal text-white leading-display [text-wrap:balance] max-w-[24ch]">
@@ -83,7 +133,7 @@ export default async function HomePage({
               </h1>
 
               <p className="text-base sm:text-lg text-slate-300 leading-[1.6] tracking-normal max-w-[60ch]">
-                {dict.hero.subheadline}
+                {renderHeroSubheadlineWithAbbr(dict.hero.subheadline, locale)}
               </p>
 
               {/* CTAs Placed Immediately Under Lead (Mobile-First: Visible on First Screen) */}
@@ -139,7 +189,7 @@ export default async function HomePage({
               <figure className="w-full max-w-sm border border-gold-500/35 bg-navy-950 shadow-elevated overflow-hidden">
                 <div className="relative aspect-[4/5] w-full max-h-[65vh] bg-navy-950">
                   <Image
-                    src="/images/mua.jpeg"
+                    src="/images/portrait.jpeg"
                     alt={`${profile.fullName} — ${dict.hero.caption}`}
                     fill
                     priority

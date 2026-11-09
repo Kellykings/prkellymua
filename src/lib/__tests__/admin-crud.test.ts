@@ -27,6 +27,7 @@ const CLEAN_STORE = {
   media: [],
   gallery: [],
   inquiries: [],
+  orders: [],
   deletedIds: {
     books: [],
     blog: [],
@@ -34,6 +35,7 @@ const CLEAN_STORE = {
     media: [],
     gallery: [],
     inquiries: [],
+    orders: [],
   },
 };
 

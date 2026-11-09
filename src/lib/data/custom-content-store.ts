@@ -6,6 +6,7 @@ import type {
   CareerEntry,
   MediaAppearance,
   GalleryPhotoItem,
+  PrintDeliveryOrder,
 } from '@/types/domain';
 
 export interface ProtocolInquiryItem {
@@ -28,6 +29,7 @@ export interface ContentOverridesData {
   media: MediaAppearance[];
   gallery: GalleryPhotoItem[];
   inquiries: ProtocolInquiryItem[];
+  orders?: PrintDeliveryOrder[];
   deletedIds: Record<string, string[]>;
 }
 
@@ -44,6 +46,7 @@ export interface ContentStoreHealth {
     media: number;
     gallery: number;
     inquiries: number;
+    orders: number;
   };
   tombstones: {
     books: number;
@@ -52,6 +55,7 @@ export interface ContentStoreHealth {
     media: number;
     gallery: number;
     inquiries: number;
+    orders: number;
   };
   lastModified?: string;
 }
@@ -67,6 +71,7 @@ const DEFAULT_STORE: ContentOverridesData = {
   media: [],
   gallery: [],
   inquiries: [],
+  orders: [],
   deletedIds: {
     books: [],
     blog: [],
@@ -74,6 +79,7 @@ const DEFAULT_STORE: ContentOverridesData = {
     media: [],
     gallery: [],
     inquiries: [],
+    orders: [],
   },
 };
 
@@ -111,6 +117,7 @@ export function loadContentOverrides(): ContentOverridesData {
           media: Array.isArray(parsed.media) ? parsed.media : [],
           gallery: Array.isArray(parsed.gallery) ? parsed.gallery : [],
           inquiries: Array.isArray(parsed.inquiries) ? parsed.inquiries : [],
+          orders: Array.isArray(parsed.orders) ? parsed.orders : [],
           deletedIds: parsed.deletedIds && typeof parsed.deletedIds === 'object'
             ? parsed.deletedIds
             : {
@@ -120,6 +127,7 @@ export function loadContentOverrides(): ContentOverridesData {
                 media: [],
                 gallery: [],
                 inquiries: [],
+                orders: [],
               },
         };
       }
@@ -178,6 +186,7 @@ export function getContentStoreHealth(): ContentStoreHealth {
     media: store.media?.length || 0,
     gallery: store.gallery?.length || 0,
     inquiries: store.inquiries?.length || 0,
+    orders: store.orders?.length || 0,
   };
 
   const tombstones = {
@@ -187,6 +196,7 @@ export function getContentStoreHealth(): ContentStoreHealth {
     media: store.deletedIds?.media?.length || 0,
     gallery: store.deletedIds?.gallery?.length || 0,
     inquiries: store.deletedIds?.inquiries?.length || 0,
+    orders: store.deletedIds?.orders?.length || 0,
   };
 
   const totalActive = Object.values(counts).reduce((a, b) => a + b, 0);

@@ -6,6 +6,110 @@ import { getExpertisePillars } from '@/lib/data/repository';
 import { t } from '@/lib/utils';
 import type { Locale } from '@/types/domain';
 
+function renderWithAbbr(text: string, locale: Locale) {
+  const acronyms: Record<string, { en: string; fr: string }> = {
+    ATIDI: {
+      en: 'African Trade & Investment Development Insurance',
+      fr: 'Agence pour l’Assurance du Commerce en Afrique (ATIDI)',
+    },
+    MINFI: {
+      en: 'Ministry of Finance (Cameroon)',
+      fr: 'Ministère des Finances (Cameroun)',
+    },
+    ENAM: {
+      en: 'National School of Administration and Magistracy (Yaoundé)',
+      fr: 'École Nationale d’Administration et de Magistrature (Yaoundé)',
+    },
+    BEAC: {
+      en: 'Bank of Central African States',
+      fr: 'Banque des États de l’Afrique Centrale',
+    },
+    COSUMAF: {
+      en: 'Central African Financial Market Surveillance Commission',
+      fr: 'Commission de Surveillance du Marché Financier de l’Afrique Centrale',
+    },
+    BVMAC: {
+      en: 'Central African Unified Stock Exchange',
+      fr: 'Bourse des Valeurs Mobilières de l’Afrique Centrale (BVMAC)',
+    },
+    CEMAC: {
+      en: 'Central African Economic and Monetary Community',
+      fr: 'Communauté Économique et Monétaire de l’Afrique Centrale',
+    },
+    TSA: {
+      en: 'Treasury Single Account',
+      fr: 'Compte Unique du Trésor (CUT)',
+    },
+    CUT: {
+      en: 'Compte Unique du Trésor (Treasury Single Account)',
+      fr: 'Compte Unique du Trésor',
+    },
+    'UNDP-GEF': {
+      en: 'United Nations Development Programme – Global Environment Facility',
+      fr: 'Programme des Nations Unies pour le Développement – Fonds pour l’Environnement Mondial (PNUD-FEM)',
+    },
+    'PNUD-FEM': {
+      en: 'Programme des Nations Unies pour le Développement – Fonds pour l’Environnement Mondial',
+      fr: 'Programme des Nations Unies pour le Développement – Fonds pour l’Environnement Mondial',
+    },
+    ICMA: {
+      en: 'International Capital Market Association',
+      fr: 'Association Internationale des Marchés de Capitaux',
+    },
+    AML: {
+      en: 'Anti-Money Laundering',
+      fr: 'Lutte Contre le Blanchiment de Capitaux (LCB-FT)',
+    },
+    'LCB-FT': {
+      en: 'Lutte Contre le Blanchiment et le Financement du Terrorisme',
+      fr: 'Lutte Contre le Blanchiment et le Financement du Terrorisme',
+    },
+    DFI: {
+      en: 'Development Finance Institution',
+      fr: 'Institution Financière de Développement (IFD)',
+    },
+    IFD: {
+      en: 'Institution Financière de Développement',
+      fr: 'Institution Financière de Développement',
+    },
+    OTA: {
+      en: 'Obligations du Trésor Assimilables (Treasury Bonds)',
+      fr: 'Obligations du Trésor Assimilables',
+    },
+    BTA: {
+      en: 'Bons du Trésor Assimilables (Treasury Bills)',
+      fr: 'Bons du Trésor Assimilables',
+    },
+    DSA: {
+      en: 'Debt Sustainability Analysis',
+      fr: 'Analyse de Viabilité de la Dette (AVD)',
+    },
+    AVD: {
+      en: 'Analyse de Viabilité de la Dette',
+      fr: 'Analyse de Viabilité de la Dette',
+    },
+  };
+
+  const regex = /(ATIDI|MINFI|ENAM|BEAC|COSUMAF|BVMAC|CEMAC|TSA|CUT|UNDP-GEF|PNUD-FEM|ICMA|AML|LCB-FT|DFI|IFD|OTA|BTA|DSA|AVD)/g;
+  const parts = text.split(regex);
+
+  return parts.map((part, index) => {
+    const acronymData = acronyms[part];
+    if (acronymData) {
+      return (
+        <abbr
+          key={index}
+          title={acronymData[locale]}
+          className="no-underline cursor-help border-b border-dotted border-current/50 hover:border-bronze-600 transition-colors"
+        >
+          {part}
+        </abbr>
+      );
+    }
+    return part;
+  });
+}
+
 export async function generateMetadata({
   params,
 }: {
@@ -136,7 +240,7 @@ export default function ExpertisePage({
                 {t(pillar.subtitle, locale)}
               </div>
               <p className="text-sm sm:text-base text-ink-700 leading-relaxed">
-                {t(pillar.summary, locale)}
+                {renderWithAbbr(t(pillar.summary, locale), locale)}
               </p>
 
               <div className="pt-2 space-y-2">
@@ -146,7 +250,7 @@ export default function ExpertisePage({
                     className="flex items-start gap-2.5 text-sm text-ink-700"
                   >
                     <span className="w-1.5 h-1.5 rounded-full bg-bronze-600 shrink-0 mt-2" />
-                    <span>{t(m, locale)}</span>
+                    <span>{renderWithAbbr(t(m, locale), locale)}</span>
                   </div>
                 ))}
               </div>
@@ -177,6 +281,40 @@ export default function ExpertisePage({
           </section>
         ))}
       </div>
+
+      {/* Institutional Cross-Pathways Bar (Zero-Duplicate Cross-Reference) */}
+      <section className="bg-surface-paper border border-surface-border p-6 sm:p-8 rounded-sm space-y-4">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div>
+            <h3 className="font-serif font-bold text-lg text-navy-900">
+              {locale === 'fr'
+                ? 'Mandats Institutionnels & Biographie Intellectuelle'
+                : 'Statutory Directorships & Intellectual Biography'}
+            </h3>
+            <p className="text-xs sm:text-sm text-ink-600 mt-1">
+              {locale === 'fr'
+                ? 'Consultez les 20 fonctions officielles d’État et la doctrine de gouvernance appuyant ces domaines d’autorité.'
+                : 'Review the 20 official sovereign offices and fiduciary doctrine underpinning these technical authority domains.'}
+            </p>
+          </div>
+          <div className="flex flex-wrap items-center gap-3 shrink-0">
+            <Link
+              href={`/${locale}/governance`}
+              className="inline-flex items-center gap-2 px-4 py-2 bg-navy-900 hover:bg-navy-800 text-gold-300 font-semibold text-xs transition-colors rounded-sm"
+            >
+              <span>{locale === 'fr' ? 'Registre des 20 Mandats' : 'Mandates Register (20 Offices)'}</span>
+              <ArrowRight className="w-3.5 h-3.5" aria-hidden="true" />
+            </Link>
+            <Link
+              href={`/${locale}/about`}
+              className="inline-flex items-center gap-2 px-4 py-2 bg-white hover:bg-surface-paper border border-surface-border text-navy-900 font-semibold text-xs transition-colors rounded-sm"
+            >
+              <span>{locale === 'fr' ? 'Biographie & Doctrine' : 'Biography & Doctrine'}</span>
+              <ArrowRight className="w-3.5 h-3.5" aria-hidden="true" />
+            </Link>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }

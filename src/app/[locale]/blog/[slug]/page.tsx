@@ -8,6 +8,94 @@ import { CitationExporter } from '@/components/shared/CitationExporter';
 import { formatCategory, formatDate, t } from '@/lib/utils';
 import type { Locale } from '@/types/domain';
 
+function renderWithAbbr(text: string, locale: Locale) {
+  const acronyms: Record<string, { en: string; fr: string }> = {
+    ATIDI: {
+      en: 'African Trade & Investment Development Insurance',
+      fr: 'Agence pour l’Assurance du Commerce en Afrique (ATIDI)',
+    },
+    MINFI: {
+      en: 'Ministry of Finance (Cameroon)',
+      fr: 'Ministère des Finances (Cameroun)',
+    },
+    ENAM: {
+      en: 'National School of Administration and Magistracy (Yaoundé)',
+      fr: 'École Nationale d’Administration et de Magistrature (Yaoundé)',
+    },
+    BEAC: {
+      en: 'Bank of Central African States',
+      fr: 'Banque des États de l’Afrique Centrale',
+    },
+    COSUMAF: {
+      en: 'Central African Financial Market Surveillance Commission',
+      fr: 'Commission de Surveillance du Marché Financier de l’Afrique Centrale',
+    },
+    BVMAC: {
+      en: 'Central African Unified Stock Exchange',
+      fr: 'Bourse des Valeurs Mobilières de l’Afrique Centrale (BVMAC)',
+    },
+    CEMAC: {
+      en: 'Central African Economic and Monetary Community',
+      fr: 'Communauté Économique et Monétaire de l’Afrique Centrale',
+    },
+    TSA: {
+      en: 'Treasury Single Account',
+      fr: 'Compte Unique du Trésor (CUT)',
+    },
+    CUT: {
+      en: 'Compte Unique du Trésor',
+      fr: 'Compte Unique du Trésor',
+    },
+    PFM: {
+      en: 'Public Financial Management',
+      fr: 'Gestion des Finances Publiques (GFP)',
+    },
+    GFP: {
+      en: 'Gestion des Finances Publiques',
+      fr: 'Gestion des Finances Publiques',
+    },
+    'UNDP-GEF': {
+      en: 'United Nations Development Programme – Global Environment Facility',
+      fr: 'Programme des Nations Unies pour le Développement – Fonds pour l’Environnement Mondial (PNUD-FEM)',
+    },
+    'PNUD-FEM': {
+      en: 'Programme des Nations Unies pour le Développement – Fonds pour l’Environnement Mondial',
+      fr: 'Programme des Nations Unies pour le Développement – Fonds pour l’Environnement Mondial',
+    },
+    IFMIS: {
+      en: 'Integrated Financial Management Information System',
+      fr: 'Système Intégré de Gestion des Finances Publiques (SIGFIP)',
+    },
+    ESG: {
+      en: 'Environmental, Social, and Governance',
+      fr: 'Environnemental, Social et de Gouvernance (ESG)',
+    },
+    SPO: {
+      en: 'Second-Party Opinion',
+      fr: 'Avis Indépendant (Second-Party Opinion)',
+    },
+  };
+
+  const regex = /(ATIDI|MINFI|ENAM|BEAC|COSUMAF|BVMAC|CEMAC|TSA|CUT|PFM|GFP|UNDP-GEF|PNUD-FEM|IFMIS|ESG|SPO)/g;
+  const parts = text.split(regex);
+
+  return parts.map((part, index) => {
+    const acronymData = acronyms[part];
+    if (acronymData) {
+      return (
+        <abbr
+          key={index}
+          title={acronymData[locale]}
+          className="no-underline cursor-help border-b border-dotted border-current/50 hover:border-bronze-600 transition-colors"
+        >
+          {part}
+        </abbr>
+      );
+    }
+    return part;
+  });
+}
+
 interface BlogPostPageProps {
   params: {
     locale: string;
@@ -99,12 +187,12 @@ export default async function BlogPostDetailPage({
         </h1>
 
         <p className="text-base sm:text-lg text-ink-700 leading-relaxed">
-          {excerpt}
+          {renderWithAbbr(excerpt, locale)}
         </p>
 
         <div className="pt-2 text-xs text-navy-800">
           {locale === 'fr' ? 'Auteur :' : 'Author:'}{' '}
-          <strong>Professor Kelly Mua Kingsly (PhD, DBA, MPA, CFA)</strong>
+          <strong>Professor Kelly Mua Kingsly, PhD, CFA</strong>
         </div>
       </header>
 
@@ -115,7 +203,7 @@ export default async function BlogPostDetailPage({
               {t(sec.heading, locale)}
             </h2>
             <p className="text-ink-700 leading-relaxed text-base sm:text-[17px]">
-              {t(sec.body, locale)}
+              {renderWithAbbr(t(sec.body, locale), locale)}
             </p>
           </section>
         ))}

@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
-import { CheckCircle2, ExternalLink, Plus, Edit3, Trash2 } from 'lucide-react';
+import { CheckCircle2, ExternalLink, Plus, Edit3, Trash2, Receipt, Boxes } from 'lucide-react';
 import { formatCurrency } from '@/lib/utils';
 import type { Book } from '@/types/domain';
 import { BookFormDrawer } from './crud/BookFormDrawer';
@@ -75,6 +75,28 @@ export function AdminBooksSection({ books: initialBooks }: { books: Book[] }) {
             </p>
           </div>
           <div className="flex flex-wrap items-center gap-2">
+            <a
+              href="https://www.sokoclick.com/en/sales/new"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-gold-500 hover:bg-gold-400 text-navy-950 text-xs font-bold shadow-sm transition-colors"
+              title="Issue SokoClick Sales Receipt"
+            >
+              <Receipt className="w-3.5 h-3.5" />
+              <span>SokoClick Sales Receipt</span>
+              <ExternalLink className="w-3 h-3 opacity-70" />
+            </a>
+            <a
+              href="https://www.sokoclick.com/en/dashboard?mode=BUSINESS"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-navy-950 border border-gold-500/40 text-gold-300 hover:text-white text-xs font-semibold shadow-sm transition-colors"
+              title="Manage Book Stock & Inventory on SokoClick"
+            >
+              <Boxes className="w-3.5 h-3.5" />
+              <span>SokoClick Inventory</span>
+              <ExternalLink className="w-3 h-3 opacity-70" />
+            </a>
             <button
               type="button"
               onClick={handleAddNew}
