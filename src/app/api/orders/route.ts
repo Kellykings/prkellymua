@@ -10,6 +10,7 @@ import {
   updateCustomEntityItem,
 } from '@/lib/data/custom-content-store';
 import { verifyAdminRequest } from '@/lib/auth/admin-auth';
+import { createSupabaseAdminClient } from '@/lib/supabase/admin';
 
 export const dynamic = 'force-dynamic';
 
@@ -100,7 +101,40 @@ export async function POST(request: Request) {
       created_at: new Date().toISOString(),
     };
 
-    // Save to atomic local store
+    // 1. Dual-write to Supabase if configured
+    const supabaseAdmin = createSupabaseAdminClient();
+    if (supabaseAdmin) {
+      try {
+        await supabaseAdmin.from('print_delivery_orders').insert({
+          id: newOrder.id,
+          order_number: newOrder.order_number,
+          book_id: newOrder.book_id,
+          book_title: newOrder.book_title,
+          book_slug: newOrder.book_slug,
+          format: newOrder.format,
+          format_sku: newOrder.format_sku,
+          quantity: newOrder.quantity,
+          unit_price_cents: newOrder.unit_price_cents,
+          unit_price_xaf: newOrder.unit_price_xaf,
+          total_price_xaf: newOrder.total_price_xaf,
+          customer_name: newOrder.customer_name,
+          customer_email: newOrder.customer_email,
+          customer_phone: newOrder.customer_phone,
+          delivery_city: newOrder.delivery_city,
+          delivery_address: newOrder.delivery_address,
+          delivery_notes: newOrder.delivery_notes,
+          payment_method: newOrder.payment_method,
+          payment_reference: newOrder.payment_reference,
+          status: newOrder.status,
+          created_at: newOrder.created_at,
+          updated_at: newOrder.created_at,
+        });
+      } catch (sbErr) {
+        console.warn('Supabase print order dual-write skipped:', sbErr);
+      }
+    }
+
+    // 2. Save to atomic local store
     addCustomEntityItem('orders', newOrder);
 
     return NextResponse.json({
@@ -120,7 +154,26 @@ export async function GET(request: Request) {
       return NextResponse.json({ error: 'Unauthorized administrative session' }, { status: 401 });
     }
 
-    const orders = getCustomEntityItems<PrintDeliveryOrder>('orders');
+    let orders: PrintDeliveryOrder[] = [];
+    const supabaseAdmin = createSupabaseAdminClient();
+    if (supabaseAdmin) {
+      try {
+        const { data, error } = await supabaseAdmin
+          .from('print_delivery_orders')
+          .select('*')
+          .order('created_at', { ascending: false });
+        if (!error && Array.isArray(data) && data.length > 0) {
+          orders = data as PrintDeliveryOrder[];
+        }
+      } catch {
+        // Fallback to local store
+      }
+    }
+
+    if (orders.length === 0) {
+      orders = getCustomEntityItems<PrintDeliveryOrder>('orders');
+    }
+
     return NextResponse.json({ ok: true, orders });
   } catch (err: unknown) {
     const msg = err instanceof Error ? err.message : 'Failed to retrieve orders';
@@ -153,6 +206,20 @@ export async function PATCH(request: Request) {
       updates.admin_notes = admin_notes.trim();
     }
 
+    // 1. Sync update to Supabase if configured
+    const supabaseAdmin = createSupabaseAdminClient();
+    if (supabaseAdmin) {
+      try {
+        await supabaseAdmin
+          .from('print_delivery_orders')
+          .update(updates)
+          .eq('id', id);
+      } catch (sbErr) {
+        console.warn('Supabase print order update skipped:', sbErr);
+      }
+    }
+
+    // 2. Update atomic local store
     const updated = updateCustomEntityItem<PrintDeliveryOrder>('orders', id, updates);
 
     if (!updated) {
