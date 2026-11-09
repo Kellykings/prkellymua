@@ -7,6 +7,7 @@ import type {
   MediaAppearance,
   GalleryPhotoItem,
   PrintDeliveryOrder,
+  HeroCopyConfig,
 } from '@/types/domain';
 
 export interface ProtocolInquiryItem {
@@ -30,6 +31,7 @@ export interface ContentOverridesData {
   gallery: GalleryPhotoItem[];
   inquiries: ProtocolInquiryItem[];
   orders?: PrintDeliveryOrder[];
+  hero?: HeroCopyConfig;
   deletedIds: Record<string, string[]>;
 }
 
@@ -118,6 +120,7 @@ export function loadContentOverrides(): ContentOverridesData {
           gallery: Array.isArray(parsed.gallery) ? parsed.gallery : [],
           inquiries: Array.isArray(parsed.inquiries) ? parsed.inquiries : [],
           orders: Array.isArray(parsed.orders) ? parsed.orders : [],
+          hero: parsed.hero || undefined,
           deletedIds: parsed.deletedIds && typeof parsed.deletedIds === 'object'
             ? parsed.deletedIds
             : {
@@ -304,3 +307,23 @@ export function deleteCustomEntityItem(
   saveContentOverrides(updated);
   return true;
 }
+
+export function getStoredHeroConfig(): HeroCopyConfig | null {
+  const store = loadContentOverrides();
+  return store.hero || null;
+}
+
+export function saveStoredHeroConfig(hero: HeroCopyConfig): boolean {
+  const store = loadContentOverrides();
+  store.hero = hero;
+  saveContentOverrides(store);
+  return true;
+}
+
+export function resetStoredHeroConfig(): boolean {
+  const store = loadContentOverrides();
+  delete store.hero;
+  saveContentOverrides(store);
+  return true;
+}
+

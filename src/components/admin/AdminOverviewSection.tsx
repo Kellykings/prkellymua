@@ -14,6 +14,7 @@ import {
   BookMarked,
   PackageCheck,
   Receipt,
+  Sparkles,
 } from 'lucide-react';
 import type { Book, BlogPost, CareerEntry, MediaAppearance } from '@/types/domain';
 
@@ -216,6 +217,13 @@ export function AdminOverviewSection({
               className="px-3 py-1.5 bg-gold-500 hover:bg-gold-400 text-navy-950 font-bold transition-colors"
             >
               Inspect Diagnostics
+            </Link>
+            <Link
+              href="/admin?tab=hero"
+              className="px-3 py-1.5 bg-navy-950 border border-gold-500/40 hover:border-gold-400 text-gold-400 font-semibold transition-colors flex items-center gap-1.5"
+            >
+              <Sparkles className="w-3.5 h-3.5" />
+              <span>Hero Copy Editor</span>
             </Link>
             <Link
               href="/admin?tab=orders"

@@ -83,9 +83,17 @@ function renderWithAbbr(text: string, locale: Locale) {
       en: 'Central African Economic and Monetary Community',
       fr: 'Communauté Économique et Monétaire de l’Afrique Centrale',
     },
+    CFI: {
+      en: 'Corporate Finance Institute',
+      fr: 'Corporate Finance Institute',
+    },
+    CIPS: {
+      en: 'Chartered Institute of Procurement & Supply',
+      fr: 'Chartered Institute of Procurement & Supply',
+    },
   };
 
-  const regex = /(ATIDI|MINFI|ENAM|BEAC-CPC-TP|BEAC|COSUMAF|UNDP-EU|PNUD-UE|UNDP|PNUD|UNCTAD|CNUCED|BVMAC|TOFE|BTA\/OTA|CEMAC)/g;
+  const regex = /(ATIDI|MINFI|ENAM|BEAC-CPC-TP|BEAC|COSUMAF|UNDP-EU|PNUD-UE|UNDP|PNUD|UNCTAD|CNUCED|BVMAC|TOFE|BTA\/OTA|CEMAC|CFI|CIPS)/g;
   const parts = text.split(regex);
 
   return parts.map((part, index) => {
@@ -176,8 +184,8 @@ export default async function AboutPage({
       honorificSuffix: profile.honorifics,
       description:
         locale === 'fr'
-          ? 'Le Professeur Kelly Mua Kingsly (PhD, CFA) est un ingénieur financier et spécialiste de la finance climat dont le parcours répond à une exigence constante : l’argent public peut-il être vérifié ?'
-          : 'Professor Kelly Mua Kingsly (PhD, CFA) is a finance engineer and climate finance specialist whose career has followed one question: can public money be verified?',
+          ? 'Leader camerounais de la finance, de l’investissement et du développement. Depuis trois décennies, le Professeur Kelly Mua Kingsley œuvre au carrefour du capital, des politiques publiques et du développement.'
+          : 'Cameroonian leader in finance, investment and development. For three decades, Professor Kelly Mua Kingsley has worked where capital, policy and development meet.',
       image: 'https://kellykingsly.com/images/photos/about.jpg',
       sameAs: [
         profile.coordinates.wikipedia,
@@ -448,25 +456,71 @@ export default async function AboutPage({
             </h1>
             <p className="text-xl sm:text-2xl font-serif text-bronze-600 mt-2 font-medium">
               {locale === 'fr'
-                ? 'Des finances publiques vérifiables.'
-                : 'Public finance that can be verified.'}
+                ? 'Leader camerounais de la finance, de l’investissement et du développement'
+                : 'Cameroonian leader in finance, investment and development'}
             </p>
             <div className="text-xs sm:text-sm font-mono text-ink-500 mt-1">
-              PhD, CFA · DBA · MPA (Harvard)
+              PhD, CFA · DBA · MBA · MPA (Harvard) · CFI · CIPS
             </div>
           </div>
 
-          <p className="text-base sm:text-lg text-navy-900 leading-relaxed font-sans">
-            {locale === 'fr'
-              ? renderWithAbbr(
-                  'Le Professeur Kelly Mua Kingsly (PhD, CFA) est un ingénieur financier et spécialiste de la finance climat dont le parcours répond à une exigence constante : l’argent public peut-il être vérifié ? Formé au sein du réseau des trésoreries régionales du Cameroun, il dirige aujourd’hui les Opérations Financières de l’État au Ministère des Finances, préside le Conseil d’Administration de l’ATIDI et forme les auditeurs d’État et magistrats financiers à l’ENAM.',
-                  locale
-                )
-              : renderWithAbbr(
-                  'Professor Kelly Mua Kingsly (PhD, CFA) is a finance engineer and climate finance specialist whose career has followed one question: can public money be verified? He began in Cameroon’s regional treasury service. Today he directs State Finance Operations at the Ministry of Finance, chairs the Board of ATIDI, and teaches state auditors and financial magistrates at ENAM.',
-                  locale
-                )}
-          </p>
+          <div className="space-y-4 text-base sm:text-lg text-navy-900 leading-relaxed font-sans">
+            {locale === 'fr' ? (
+              <>
+                <p>
+                  {renderWithAbbr(
+                    'Depuis trois décennies, le Professeur Kelly Mua Kingsley œuvre au carrefour du capital, des politiques publiques et du développement — du Ministère des Finances du Cameroun et de la Banque des États de l’Afrique Centrale (BEAC) aux Nations Unies, à la CNUCED, à l’Union Européenne et aux marchés internationaux, de Yaoundé à Dubaï.',
+                    locale
+                  )}
+                </p>
+                <p>
+                  {renderWithAbbr(
+                    'Diplômé de Harvard et façonné par les réalités africaines, il réunit des qualifications académiques et professionnelles de premier plan, notamment PhD, DBA, MBA, MPA, CFA, CFI et CIPS. Pourtant, sa qualification la plus déterminante demeure son expérience pratique : il a constaté comment la crédibilité, des institutions solides et une signature de confiance permettent de libérer les opportunités d’une nation.',
+                    locale
+                  )}
+                </p>
+                <p>
+                  {renderWithAbbr(
+                    'Sa conviction est limpide : le Cameroun est riche de son potentiel et de ses ressources. Le défi consiste à bâtir la confiance nécessaire pour transformer ce potentiel en une prospérité durable. Son action se concentre sur la structuration du capital, le renforcement des garanties d’investissement et la promotion de la finance climat et islamique — des leviers concrets pour mobiliser l’investissement et soutenir un développement inclusif.',
+                    locale
+                  )}
+                </p>
+                <p className="font-medium text-navy-950">
+                  {renderWithAbbr(
+                    'La vision du Professeur Kingsley est celle d’Une Afrique Nouvelle : confiante, crédible et prête à guider son avenir — sur le continent comme sur la scène mondiale.',
+                    locale
+                  )}
+                </p>
+              </>
+            ) : (
+              <>
+                <p>
+                  {renderWithAbbr(
+                    'For three decades, Professor Kelly Mua Kingsley has worked where capital, policy and development meet—from Cameroon’s Ministry of Finance and the Bank of Central African States (BEAC) to the United Nations, UNCTAD, the European Union and international markets spanning Yaoundé to Dubai.',
+                    locale
+                  )}
+                </p>
+                <p>
+                  {renderWithAbbr(
+                    'Harvard-trained and shaped by Africa’s realities, he brings together advanced academic and professional credentials, including a PhD, DBA, MBA, MPA, CFA, CFI and CIPS. Yet his most important qualification is practical experience: he has seen how credibility, sound institutions and a trusted signature can help unlock opportunity for a nation.',
+                    locale
+                  )}
+                </p>
+                <p>
+                  {renderWithAbbr(
+                    'His conviction is clear: Cameroon is rich in potential and resources. The challenge is building the trust needed to turn that potential into lasting prosperity. His work focuses on structuring capital, strengthening investment guarantees and advancing climate and Islamic finance—practical tools to mobilize investment and support inclusive development.',
+                    locale
+                  )}
+                </p>
+                <p className="font-medium text-navy-950">
+                  {renderWithAbbr(
+                    'Professor Kingsley’s vision is A New Africa: confident, credible and ready to lead—at home and on the global stage.',
+                    locale
+                  )}
+                </p>
+              </>
+            )}
+          </div>
 
           <div className="pt-2 flex flex-wrap items-center gap-3">
             <span className="px-2.5 py-1 bg-surface-paper border border-surface-border text-xs font-semibold text-navy-900 rounded-sm inline-flex items-center gap-1.5">

@@ -6,6 +6,7 @@ import type {
   MediaAppearanceType,
   GalleryPhotoItem,
   EventCategory,
+  HeroCopyConfig,
 } from '@/types/domain';
 
 export interface ValidationResult<T> {
@@ -331,3 +332,93 @@ export function validateInquiryPayload(raw: unknown): ValidationResult<Record<st
 
   return { valid: true, data: sanitized };
 }
+
+function sanitizeSafeUrl(input: unknown, defaultUrl: string): string {
+  if (typeof input !== 'string') return defaultUrl;
+  const trimmed = input.trim();
+  if (trimmed.startsWith('/') || trimmed.startsWith('https://')) {
+    return trimmed.slice(0, 500);
+  }
+  return defaultUrl;
+}
+
+export function validateHeroCopyPayload(raw: unknown): ValidationResult<HeroCopyConfig> {
+  const r = getRecord(raw);
+  if (!r) {
+    return { valid: false, error: 'Hero copy payload must be a valid JSON object.' };
+  }
+
+  const headline = getLocalized(r, 'headline');
+  if (!headline.en || headline.en.length < 5) {
+    return { valid: false, error: 'English headline must be at least 5 characters.' };
+  }
+
+  const subheadline = getLocalized(r, 'subheadline');
+  if (!subheadline.en || subheadline.en.length < 15) {
+    return { valid: false, error: 'English subheadline must be at least 15 characters.' };
+  }
+
+  const eyebrow = getLocalized(r, 'eyebrow');
+  const ctaPrimary = getLocalized(r, 'ctaPrimary');
+  const ctaSecondary = getLocalized(r, 'ctaSecondary');
+  const role1 = getLocalized(r, 'role1');
+  const role2 = getLocalized(r, 'role2');
+  const role3 = getLocalized(r, 'role3');
+  const independenceText = getLocalized(r, 'independenceText');
+  const independenceLinkText = getLocalized(r, 'independenceLinkText');
+  const caption = getLocalized(r, 'caption');
+
+  const sanitized: HeroCopyConfig = {
+    eyebrow: {
+      en: eyebrow.en || 'SOVEREIGN FINANCE · GOVERNANCE · DEVELOPMENT',
+      fr: eyebrow.fr || eyebrow.en || 'FINANCE SOUVERAINE · GOUVERNANCE · DÉVELOPPEMENT',
+    },
+    headline: {
+      en: headline.en,
+      fr: headline.fr || headline.en,
+    },
+    subheadline: {
+      en: subheadline.en,
+      fr: subheadline.fr || subheadline.en,
+    },
+    ctaPrimary: {
+      en: ctaPrimary.en || 'Browse books',
+      fr: ctaPrimary.fr || ctaPrimary.en || 'Parcourir les ouvrages',
+    },
+    ctaPrimaryLink: sanitizeSafeUrl(r.ctaPrimaryLink, '/books'),
+    ctaSecondary: {
+      en: ctaSecondary.en || 'About the Professor',
+      fr: ctaSecondary.fr || ctaSecondary.en || 'À propos du Professeur',
+    },
+    ctaSecondaryLink: sanitizeSafeUrl(r.ctaSecondaryLink, '/about'),
+    role1: {
+      en: role1.en || 'Director of State Finance Operations · MINFI',
+      fr: role1.fr || role1.en || 'Directeur des Opérations financières de l’État · MINFI',
+    },
+    role2: {
+      en: role2.en || 'Chair of the Board · ATIDI',
+      fr: role2.fr || role2.en || 'Président du Conseil d’administration · ATIDI',
+    },
+    role3: {
+      en: role3.en || 'Senior Lecturer · ENAM',
+      fr: role3.fr || role3.en || 'Maître de conférences · ENAM',
+    },
+    independenceText: {
+      en: independenceText.en || 'Independent academic website. Not an official channel of any government body or institution.',
+      fr: independenceText.fr || independenceText.en || 'Site académique indépendant. Ne constitue le canal officiel d’aucun organisme public ni d’aucune institution.',
+    },
+    independenceLinkText: {
+      en: independenceLinkText.en || 'Read the independence charter',
+      fr: independenceLinkText.fr || independenceLinkText.en || 'Lire la charte d’indépendance',
+    },
+    caption: {
+      en: caption.en || 'Knight, National Order of Valor',
+      fr: caption.fr || caption.en || 'Chevalier de l’Ordre de la Valeur',
+    },
+    portraitImageUrl: sanitizeSafeUrl(r.portraitImageUrl, '/images/portrait.jpeg'),
+    updated_at: new Date().toISOString(),
+  };
+
+  return { valid: true, data: sanitized };
+}
+

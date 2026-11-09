@@ -22,9 +22,9 @@ function sqlVal(val: unknown): string {
 }
 
 function sqlArray(arr?: string[]): string {
-  if (!Array.isArray(arr) || arr.length === 0) return "'{}'::text[]";
-  const elements = arr.map((item) => `"${item.replace(/"/g, '\\"')}"`).join(',');
-  return `'${elements}'::text[]`;
+  if (!Array.isArray(arr) || arr.length === 0) return 'ARRAY[]::text[]';
+  const elements = arr.map((item) => sqlVal(item)).join(', ');
+  return `ARRAY[${elements}]::text[]`;
 }
 
 describe('Generate Full Production Supabase SQL Seed', () => {
@@ -88,7 +88,10 @@ FROM public.books WHERE slug = ${sqlVal(book.slug)};\n`;
 
     sql += `\n-- 2. POLICY BRIEFS & WORKING PAPERS (${SEED_BLOG_POSTS.length} Briefs)\n`;
     for (const post of SEED_BLOG_POSTS) {
-      const contentMarkdown = post.content_sections?.map((s) => `## ${s.heading?.en || ''}\n\n${s.body?.en || ''}`).join('\n\n') || '';
+      const contentMarkdown = {
+        en: post.content_sections?.map((s) => `## ${s.heading?.en || ''}\n\n${s.body?.en || ''}`).join('\n\n') || '',
+        fr: post.content_sections?.map((s) => `## ${s.heading?.fr || s.heading?.en || ''}\n\n${s.body?.fr || s.body?.en || ''}`).join('\n\n') || '',
+      };
       const coverImageUrl = `/images/blog/${post.slug}.jpg`;
       sql += `INSERT INTO public.blog_posts (id, slug, title, excerpt, content_markdown, cover_image_url, category, tags, estimated_read_minutes, doi_reference, status)
 VALUES (

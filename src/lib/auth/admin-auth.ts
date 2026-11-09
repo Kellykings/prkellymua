@@ -5,7 +5,7 @@ export const ADMIN_COOKIE_NAME = 'kmk_admin_session';
 const DEFAULT_DEV_PASSKEY = 'kmk-governance-2026!';
 
 function getAdminPasskey(): string {
-  return process.env.ADMIN_PASSKEY || DEFAULT_DEV_PASSKEY;
+  return process.env.ADMIN_PASSKEY || process.env.ADMIN_STUDIO_PASSCODE || DEFAULT_DEV_PASSKEY;
 }
 
 function getSecretKey(): string {

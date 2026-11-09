@@ -460,16 +460,10 @@ VALUES (
   'analyzing-bvmac-liquidity-paradigms-central-africa',
   '{"en":"Analyzing BVMAC Liquidity Paradigms and Sovereign Bond Depth in Central Africa","fr":"Analyse des Paradigmes de Liquidité de la BVMAC et Profondeur du Marché Obligataire en Afrique Centrale"}'::jsonb,
   '{"en":"A strategic policy assessment of post-unification market microstructure across the CEMAC zone, examining institutional investor participation and secondary market clearing mechanisms.","fr":"Une évaluation stratégique de la microstructure du marché financier unifié de la CEMAC, examinant la participation des investisseurs institutionnels et la liquidité secondaire."}'::jsonb,
-  '## 1. Structural Context: Unification of the Regional Exchange
-
-The consolidation of the Central African financial market under the single exchange architecture of BVMAC and the regulatory supervision of COSUMAF established an essential institutional foundation. However, transforming primary sovereign bond syndications into an active, liquid secondary market requires targeted structural incentives for non-bank institutional investors, including pension funds and insurance underwriters.
-
-## 2. Deepening Maturity Curves and De-Risking Infrastructure Issuances
-
-When sovereign issuers coordinate closely with multilateral guarantee institutions such as ATIDI and regional development banks, credit-enhanced project bonds can attract long-term domestic and international capital without overburdening short-term treasury liquidity.',
+  '{"en":"## 1. Structural Context: Unification of the Regional Exchange\n\nThe consolidation of the Central African financial market under the single exchange architecture of BVMAC and the regulatory supervision of COSUMAF established an essential institutional foundation. However, transforming primary sovereign bond syndications into an active, liquid secondary market requires targeted structural incentives for non-bank institutional investors, including pension funds and insurance underwriters.\n\n## 2. Deepening Maturity Curves and De-Risking Infrastructure Issuances\n\nWhen sovereign issuers coordinate closely with multilateral guarantee institutions such as ATIDI and regional development banks, credit-enhanced project bonds can attract long-term domestic and international capital without overburdening short-term treasury liquidity.","fr":"## 1. Contexte Structurel : L’Unification de la Bourse Régionale\n\nLa consolidation du marché financier d’Afrique centrale autour de la BVMAC et sous la supervision de la COSUMAF a posé un socle institutionnel déterminant. Toutefois, convertir le dynamisme du marché primaire des titres publics en un marché secondaire liquide exige des incitations structurelles ciblées en direction des investisseurs institutionnels non bancaires.\n\n## 2. Allongement de la Courbe des Taux et Sécurisation des Émissions d’Infrastructures\n\nLorsque les émetteurs souverains coordonnent leurs opérations avec des institutions multilatérales de garantie telles que l’ATIDI et les banques de développement, les obligations de projet rehaussées permettent de mobiliser l’épargne longue sans alourdir la trésorerie à court terme."}'::jsonb,
   '/images/blog/analyzing-bvmac-liquidity-paradigms-central-africa.jpg',
   'Capital Markets',
-  '"BVMAC","COSUMAF","CEMAC","Sovereign Bonds","Capital Markets"'::text[],
+  ARRAY['BVMAC', 'COSUMAF', 'CEMAC', 'Sovereign Bonds', 'Capital Markets']::text[],
   8,
   'KMK-PB-2026-01',
   'published'
@@ -490,12 +484,10 @@ VALUES (
   'sovereign-green-bonds-and-climate-resilient-debt-frameworks',
   '{"en":"Sovereign Green Bonds & Climate-Resilient Debt Frameworks in Emerging Economies","fr":"Obligations Vertes Souveraines et Cadres de Dette Résiliente au Climat dans les Économies Émergentes"}'::jsonb,
   '{"en":"How the Global Green Bond Initiative (UNDP-GEF) and rigorous use-of-proceeds verification can lower sovereign borrowing costs while financing Congo Basin biodiversity and clean infrastructure.","fr":"Comment l’Initiative Mondiale sur les Obligations Vertes (PNUD-FEM) et la traçabilité rigoureuse des fonds permettent d’optimiser le coût de financement souverain tout en protégeant le Bassin du Congo."}'::jsonb,
-  '## 1. Aligning Sovereign Fiscal Architecture with Green Taxonomies
-
-Credible thematic sovereign issuances depend on auditable budget tagging, independent second-party opinions (SPOs), and transparent impact reporting. Integrating environmental expenditure tracking directly within state treasury execution prevents greenwashing and unlocks concessional blended finance.',
+  '{"en":"## 1. Aligning Sovereign Fiscal Architecture with Green Taxonomies\n\nCredible thematic sovereign issuances depend on auditable budget tagging, independent second-party opinions (SPOs), and transparent impact reporting. Integrating environmental expenditure tracking directly within state treasury execution prevents greenwashing and unlocks concessional blended finance.","fr":"## 1. Aligner l’Architecture Budgétaire Souveraine avec les Taxonomies Vertes\n\nLa crédibilité des émissions souveraines thématiques repose sur un marquage budgétaire vérifiable, des avis indépendants (SPO) et un reporting d’impact rigoureux. L’intégration du suivi environnemental au cœur de l’exécution du Trésor prévient l’écoblanchiment et ouvre l’accès aux financements mixtes."}'::jsonb,
   '/images/blog/sovereign-green-bonds-and-climate-resilient-debt-frameworks.jpg',
   'ESG & Climate Finance',
-  '"Green Bonds","UNDP-GEF","Climate Finance","Sovereign Debt","ESG"'::text[],
+  ARRAY['Green Bonds', 'UNDP-GEF', 'Climate Finance', 'Sovereign Debt', 'ESG']::text[],
   7,
   'KMK-PB-2026-02',
   'published'
@@ -516,12 +508,10 @@ VALUES (
   'forensic-audit-controls-in-modern-public-financial-management',
   '{"en":"Embedding Preventive Forensic Audit Controls in Public Financial Management (PFM)","fr":"Intégrer les Contrôles Préventifs d’Audit Judiciaire dans la Gestion des Finances Publiques (GFP)"}'::jsonb,
   '{"en":"Moving beyond ex-post compliance inspections toward continuous quantitative red-flag screening across state treasury disbursements and public procurement.","fr":"Dépasser les contrôles de conformité a posteriori pour instaurer une détection quantitative continue des signaux d’alerte sur la chaîne de la dépense publique."}'::jsonb,
-  '## 1. Continuous Anomaly Detection in Treasury Single Accounts
-
-As state budgets expand in scale and complexity, manual sampling is no longer sufficient. Embedding automated Benford distribution checks, vendor-beneficiary cross-matching, and split-requisition alerts inside integrated financial management information systems (IFMIS) intercepts irregularities prior to settlement.',
+  '{"en":"## 1. Continuous Anomaly Detection in Treasury Single Accounts\n\nAs state budgets expand in scale and complexity, manual sampling is no longer sufficient. Embedding automated Benford distribution checks, vendor-beneficiary cross-matching, and split-requisition alerts inside integrated financial management information systems (IFMIS) intercepts irregularities prior to settlement.","fr":"## 1. Détection Continue d’Anomalies au sein du Compte Unique du Trésor\n\nFace à l’accroissement des volumes budgétaires, l’échantillonnage manuel ne suffit plus. L’intégration de tests automatisés de distribution de Benford et de recoupements des bénéficiaires effectifs au sein des systèmes d’information financière permet d’intercepter les irrégularités avant le décaissement."}'::jsonb,
   '/images/blog/forensic-audit-controls-in-modern-public-financial-management.jpg',
   'Forensic Auditing & Integrity',
-  '"Forensic Accounting","PFM","Fraud Detection","Public Treasury"'::text[],
+  ARRAY['Forensic Accounting', 'PFM', 'Fraud Detection', 'Public Treasury']::text[],
   9,
   'KMK-PB-2026-03',
   'published'
@@ -542,12 +532,10 @@ VALUES (
   'multilateral-risk-mitigation-and-african-trade-finance',
   '{"en":"Multilateral Risk Mitigation and Sovereign Credit Enhancement in African Trade Finance","fr":"Atténuation Multilatérale des Risques et Rehaussement de Crédit Souverain en Afrique"}'::jsonb,
   '{"en":"Examining the catalytic role of multilateral political risk insurance and credit guarantees in narrowing the African risk perception premium.","fr":"Analyse du rôle catalyseur de l’assurance contre le risque politique et des garanties multilatérales dans la réduction de la prime de risque perçue en Afrique."}'::jsonb,
-  '## 1. Correcting Asymmetric Risk Pricing through Multilateral Guarantees
-
-Empirical default rates on African infrastructure and sovereign-backed trade obligations consistently outperform market-implied credit spreads. Multilateral insurers with preferred-creditor status bridge this gap by absorbing political and payment-delay risks, unlocking longer maturities from global commercial syndicates.',
+  '{"en":"## 1. Correcting Asymmetric Risk Pricing through Multilateral Guarantees\n\nEmpirical default rates on African infrastructure and sovereign-backed trade obligations consistently outperform market-implied credit spreads. Multilateral insurers with preferred-creditor status bridge this gap by absorbing political and payment-delay risks, unlocking longer maturities from global commercial syndicates.","fr":"## 1. Corriger l’Asymétrie de Tarification du Risque par les Garanties Multilatérales\n\nLes taux de défaut empiriques sur les projets d’infrastructures en Afrique demeurent nettement inférieurs aux primes de risque implicites du marché. Les assureurs multilatéraux bénéficiant du statut de créancier privilégié permettent de réduire cet écart et d’allonger les maturités bancaires."}'::jsonb,
   '/images/blog/multilateral-risk-mitigation-and-african-trade-finance.jpg',
   'Sovereign Debt & PFM',
-  '"ATIDI","Trade Finance","Credit Enhancement","Multilateral Governance"'::text[],
+  ARRAY['ATIDI', 'Trade Finance', 'Credit Enhancement', 'Multilateral Governance']::text[],
   6,
   'KMK-PB-2026-04',
   'published'

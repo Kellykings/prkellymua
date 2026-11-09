@@ -13,8 +13,17 @@ import {
 import {
   getCustomEntityItems,
   getDeletedEntityIds,
+  getStoredHeroConfig,
 } from '@/lib/data/custom-content-store';
-import type { Book, BlogPost, CareerEntry, MediaAppearance, GalleryPhotoItem, InstitutionalEvent } from '@/types/domain';
+import type {
+  Book,
+  BlogPost,
+  CareerEntry,
+  MediaAppearance,
+  GalleryPhotoItem,
+  InstitutionalEvent,
+  HeroCopyConfig,
+} from '@/types/domain';
 
 export async function getBooks(): Promise<Book[]> {
   try {
@@ -186,3 +195,96 @@ export function getInstitutionalEvents(
   }
   return INSTITUTIONAL_EVENTS.filter((e) => e.status === status);
 }
+
+export function getDefaultHeroConfig(): HeroCopyConfig {
+  return {
+    eyebrow: {
+      en: 'SOVEREIGN FINANCE · GOVERNANCE · DEVELOPMENT',
+      fr: 'FINANCE SOUVERAINE · GOUVERNANCE · DÉVELOPPEMENT',
+    },
+    headline: {
+      en: 'Sovereign finance and governance for Africa’s development.',
+      fr: 'Finance souveraine et gouvernance au service du développement de l’Afrique.',
+    },
+    subheadline: {
+      en: 'Professor Kelly Mua Kingsly (PhD, CFA) is a finance engineer and climate finance specialist working where sovereign treasury execution meets multilateral risk governance and forensic investigation. Chair of the Board of ATIDI and Director of State Finance Operations, he brings practitioner rigor and academic depth to engagements with UNDP-EU, UNCTAD, BEAC-CPC-TP and COSUMAF.',
+      fr: 'Le Professeur Kelly Mua Kingsly (PhD, CFA) est ingénieur financier et spécialiste de la finance climat. Il intervient là où l’exécution de la trésorerie de l’État rejoint la gouvernance des risques multilatéraux et les enquêtes forensiques. Président du Conseil d’administration de l’ATIDI et Directeur des Opérations financières de l’État, il met sa rigueur de praticien et sa profondeur académique au service de ses échanges avec le PNUD-UE, la CNUCED, la BEAC-CPC-TP et la COSUMAF.',
+    },
+    ctaPrimary: {
+      en: 'Browse books',
+      fr: 'Parcourir les ouvrages',
+    },
+    ctaPrimaryLink: '/books',
+    ctaSecondary: {
+      en: 'About the Professor',
+      fr: 'À propos du Professeur',
+    },
+    ctaSecondaryLink: '/about',
+    role1: {
+      en: 'Director of State Finance Operations · MINFI',
+      fr: 'Directeur des Opérations financières de l’État · MINFI',
+    },
+    role2: {
+      en: 'Chair of the Board · ATIDI',
+      fr: 'Président du Conseil d’administration · ATIDI',
+    },
+    role3: {
+      en: 'Senior Lecturer · ENAM',
+      fr: 'Maître de conférences · ENAM',
+    },
+    independenceText: {
+      en: 'Independent academic website. Not an official channel of any government body or institution.',
+      fr: 'Site académique indépendant. Ne constitue le canal officiel d’aucun organisme public ni d’aucune institution.',
+    },
+    independenceLinkText: {
+      en: 'Read the independence charter',
+      fr: 'Lire la charte d’indépendance',
+    },
+    caption: {
+      en: 'Knight, National Order of Valor',
+      fr: 'Chevalier de l’Ordre de la Valeur',
+    },
+    portraitImageUrl: '/images/portrait.jpeg',
+  };
+}
+
+export async function getHeroConfig(): Promise<HeroCopyConfig> {
+  const defaults = getDefaultHeroConfig();
+
+  // 1. Try Supabase site_settings
+  try {
+    const supabase = createServerClient();
+    if (supabase) {
+      const { data, error } = await supabase
+        .from('site_settings')
+        .select('value')
+        .eq('key', 'hero_copy')
+        .single();
+
+      if (!error && data?.value) {
+        return {
+          ...defaults,
+          ...(data.value as Partial<HeroCopyConfig>),
+        };
+      }
+    }
+  } catch {
+    // Failover to local store
+  }
+
+  // 2. Try local content store
+  try {
+    const local = getStoredHeroConfig();
+    if (local) {
+      return {
+        ...defaults,
+        ...local,
+      };
+    }
+  } catch {
+    // Failover to defaults
+  }
+
+  return defaults;
+}
+

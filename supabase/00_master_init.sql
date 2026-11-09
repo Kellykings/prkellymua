@@ -1,7 +1,5 @@
 -- ==============================================================================
 -- PROFESSOR KELLY MUA KINGSLY PLATFORM: MASTER PRODUCTION DATABASE INITIALIZER
--- Executes in Supabase Dashboard SQL Editor (New Query -> Paste -> Run)
--- Initializes Complete PostgreSQL Schema, Indexes, RLS Policies, and Catalog Seed
 -- ==============================================================================
 
 -- ==============================================================================
@@ -815,10 +813,10 @@ VALUES (
   'analyzing-bvmac-liquidity-paradigms-central-africa',
   '{"en":"Analyzing BVMAC Liquidity Paradigms and Sovereign Bond Depth in Central Africa","fr":"Analyse des Paradigmes de Liquidité de la BVMAC et Profondeur du Marché Obligataire en Afrique Centrale"}'::jsonb,
   '{"en":"A strategic policy assessment of post-unification market microstructure across the CEMAC zone, examining institutional investor participation and secondary market clearing mechanisms.","fr":"Une évaluation stratégique de la microstructure du marché financier unifié de la CEMAC, examinant la participation des investisseurs institutionnels et la liquidité secondaire."}'::jsonb,
-  NULL,
-  NULL,
+  '{"en":"## 1. Structural Context: Unification of the Regional Exchange\n\nThe consolidation of the Central African financial market under the single exchange architecture of BVMAC and the regulatory supervision of COSUMAF established an essential institutional foundation. However, transforming primary sovereign bond syndications into an active, liquid secondary market requires targeted structural incentives for non-bank institutional investors, including pension funds and insurance underwriters.\n\n## 2. Deepening Maturity Curves and De-Risking Infrastructure Issuances\n\nWhen sovereign issuers coordinate closely with multilateral guarantee institutions such as ATIDI and regional development banks, credit-enhanced project bonds can attract long-term domestic and international capital without overburdening short-term treasury liquidity.","fr":"## 1. Contexte Structurel : L’Unification de la Bourse Régionale\n\nLa consolidation du marché financier d’Afrique centrale autour de la BVMAC et sous la supervision de la COSUMAF a posé un socle institutionnel déterminant. Toutefois, convertir le dynamisme du marché primaire des titres publics en un marché secondaire liquide exige des incitations structurelles ciblées en direction des investisseurs institutionnels non bancaires.\n\n## 2. Allongement de la Courbe des Taux et Sécurisation des Émissions d’Infrastructures\n\nLorsque les émetteurs souverains coordonnent leurs opérations avec des institutions multilatérales de garantie telles que l’ATIDI et les banques de développement, les obligations de projet rehaussées permettent de mobiliser l’épargne longue sans alourdir la trésorerie à court terme."}'::jsonb,
+  '/images/blog/analyzing-bvmac-liquidity-paradigms-central-africa.jpg',
   'Capital Markets',
-  '"BVMAC","COSUMAF","CEMAC","Sovereign Bonds","Capital Markets"'::text[],
+  ARRAY['BVMAC', 'COSUMAF', 'CEMAC', 'Sovereign Bonds', 'Capital Markets']::text[],
   8,
   'KMK-PB-2026-01',
   'published'
@@ -839,10 +837,10 @@ VALUES (
   'sovereign-green-bonds-and-climate-resilient-debt-frameworks',
   '{"en":"Sovereign Green Bonds & Climate-Resilient Debt Frameworks in Emerging Economies","fr":"Obligations Vertes Souveraines et Cadres de Dette Résiliente au Climat dans les Économies Émergentes"}'::jsonb,
   '{"en":"How the Global Green Bond Initiative (UNDP-GEF) and rigorous use-of-proceeds verification can lower sovereign borrowing costs while financing Congo Basin biodiversity and clean infrastructure.","fr":"Comment l’Initiative Mondiale sur les Obligations Vertes (PNUD-FEM) et la traçabilité rigoureuse des fonds permettent d’optimiser le coût de financement souverain tout en protégeant le Bassin du Congo."}'::jsonb,
-  NULL,
-  NULL,
+  '{"en":"## 1. Aligning Sovereign Fiscal Architecture with Green Taxonomies\n\nCredible thematic sovereign issuances depend on auditable budget tagging, independent second-party opinions (SPOs), and transparent impact reporting. Integrating environmental expenditure tracking directly within state treasury execution prevents greenwashing and unlocks concessional blended finance.","fr":"## 1. Aligner l’Architecture Budgétaire Souveraine avec les Taxonomies Vertes\n\nLa crédibilité des émissions souveraines thématiques repose sur un marquage budgétaire vérifiable, des avis indépendants (SPO) et un reporting d’impact rigoureux. L’intégration du suivi environnemental au cœur de l’exécution du Trésor prévient l’écoblanchiment et ouvre l’accès aux financements mixtes."}'::jsonb,
+  '/images/blog/sovereign-green-bonds-and-climate-resilient-debt-frameworks.jpg',
   'ESG & Climate Finance',
-  '"Green Bonds","UNDP-GEF","Climate Finance","Sovereign Debt","ESG"'::text[],
+  ARRAY['Green Bonds', 'UNDP-GEF', 'Climate Finance', 'Sovereign Debt', 'ESG']::text[],
   7,
   'KMK-PB-2026-02',
   'published'
@@ -863,10 +861,10 @@ VALUES (
   'forensic-audit-controls-in-modern-public-financial-management',
   '{"en":"Embedding Preventive Forensic Audit Controls in Public Financial Management (PFM)","fr":"Intégrer les Contrôles Préventifs d’Audit Judiciaire dans la Gestion des Finances Publiques (GFP)"}'::jsonb,
   '{"en":"Moving beyond ex-post compliance inspections toward continuous quantitative red-flag screening across state treasury disbursements and public procurement.","fr":"Dépasser les contrôles de conformité a posteriori pour instaurer une détection quantitative continue des signaux d’alerte sur la chaîne de la dépense publique."}'::jsonb,
-  NULL,
-  NULL,
+  '{"en":"## 1. Continuous Anomaly Detection in Treasury Single Accounts\n\nAs state budgets expand in scale and complexity, manual sampling is no longer sufficient. Embedding automated Benford distribution checks, vendor-beneficiary cross-matching, and split-requisition alerts inside integrated financial management information systems (IFMIS) intercepts irregularities prior to settlement.","fr":"## 1. Détection Continue d’Anomalies au sein du Compte Unique du Trésor\n\nFace à l’accroissement des volumes budgétaires, l’échantillonnage manuel ne suffit plus. L’intégration de tests automatisés de distribution de Benford et de recoupements des bénéficiaires effectifs au sein des systèmes d’information financière permet d’intercepter les irrégularités avant le décaissement."}'::jsonb,
+  '/images/blog/forensic-audit-controls-in-modern-public-financial-management.jpg',
   'Forensic Auditing & Integrity',
-  '"Forensic Accounting","PFM","Fraud Detection","Public Treasury"'::text[],
+  ARRAY['Forensic Accounting', 'PFM', 'Fraud Detection', 'Public Treasury']::text[],
   9,
   'KMK-PB-2026-03',
   'published'
@@ -887,10 +885,10 @@ VALUES (
   'multilateral-risk-mitigation-and-african-trade-finance',
   '{"en":"Multilateral Risk Mitigation and Sovereign Credit Enhancement in African Trade Finance","fr":"Atténuation Multilatérale des Risques et Rehaussement de Crédit Souverain en Afrique"}'::jsonb,
   '{"en":"Examining the catalytic role of multilateral political risk insurance and credit guarantees in narrowing the African risk perception premium.","fr":"Analyse du rôle catalyseur de l’assurance contre le risque politique et des garanties multilatérales dans la réduction de la prime de risque perçue en Afrique."}'::jsonb,
-  NULL,
-  NULL,
+  '{"en":"## 1. Correcting Asymmetric Risk Pricing through Multilateral Guarantees\n\nEmpirical default rates on African infrastructure and sovereign-backed trade obligations consistently outperform market-implied credit spreads. Multilateral insurers with preferred-creditor status bridge this gap by absorbing political and payment-delay risks, unlocking longer maturities from global commercial syndicates.","fr":"## 1. Corriger l’Asymétrie de Tarification du Risque par les Garanties Multilatérales\n\nLes taux de défaut empiriques sur les projets d’infrastructures en Afrique demeurent nettement inférieurs aux primes de risque implicites du marché. Les assureurs multilatéraux bénéficiant du statut de créancier privilégié permettent de réduire cet écart et d’allonger les maturités bancaires."}'::jsonb,
+  '/images/blog/multilateral-risk-mitigation-and-african-trade-finance.jpg',
   'Sovereign Debt & PFM',
-  '"ATIDI","Trade Finance","Credit Enhancement","Multilateral Governance"'::text[],
+  ARRAY['ATIDI', 'Trade Finance', 'Credit Enhancement', 'Multilateral Governance']::text[],
   6,
   'KMK-PB-2026-04',
   'published'
@@ -917,8 +915,8 @@ VALUES (
   true,
   'Yaoundé, Cameroon',
   '{"en":"Directs sovereign financial operations, state revenue and expenditure monitoring, the financial operations dashboard (TOFE), debt evaluations, and government bond syndications on regional capital markets.","fr":"Dirige les opérations financières de l’État, le suivi des recettes et dépenses publiques, le tableau des opérations financières (TOFE), l’évaluation de la dette et les syndications obligataires sur le marché des capitaux."}'::jsonb,
-  NULL,
-  0,
+  '{"en":"Statutory public-sector executive appointment · Decree Ref. MINFI","fr":"Nomination statutaire de la fonction publique · Décret Ministériel MINFI"}'::jsonb,
+  1,
   'published'
 );
 INSERT INTO public.career_entries (id, organization, role_title, category, period, is_current, location, description, verification_source, display_order, status)
@@ -931,8 +929,8 @@ VALUES (
   true,
   'Nairobi, Kenya (Pan-African Sovereign Mandate)',
   '{"en":"Provides strategic board leadership across 24 African sovereign member states, presiding over the 2024–2027 strategic plan, governance committees, and multilateral underwriting of trade credit and political risk insurance.","fr":"Assure la présidence stratégique du Conseil d’Administration auprès de 24 États souverains membres, pilotant le plan stratégique 2024–2027, les comités de gouvernance et la souscription multilatérale d’assurance-crédit et de risques politiques."}'::jsonb,
-  NULL,
-  0,
+  '{"en":"Multilateral sovereign constituency election · ATIDI Constituent Treaty Charter","fr":"Élection par les États membres souverains · Traité constitutif multilatéral ATIDI"}'::jsonb,
+  2,
   'published'
 );
 INSERT INTO public.career_entries (id, organization, role_title, category, period, is_current, location, description, verification_source, display_order, status)
@@ -945,8 +943,8 @@ VALUES (
   false,
   'Nairobi, Kenya',
   '{"en":"Delivered governance oversight, financial performance reviews, and sovereign risk mitigation policy decisions across member nations.","fr":"A assuré la gouvernance d’entreprise, la surveillance de la performance financière et la validation des politiques d’atténuation des risques souverains."}'::jsonb,
-  NULL,
-  0,
+  '{"en":"Multilateral Board Governance Record · ATIDI Board of Directors Register","fr":"Registre de gouvernance multilatérale · Conseil d’Administration ATIDI"}'::jsonb,
+  3,
   'published'
 );
 INSERT INTO public.career_entries (id, organization, role_title, category, period, is_current, location, description, verification_source, display_order, status)
@@ -959,8 +957,8 @@ VALUES (
   true,
   'International / Global',
   '{"en":"Provides strategic leadership to a premier international platform uniting finance ministers, central bank governors, multilateral development banks, institutional investors, and market regulators to deepen global banking and capital markets.","fr":"Apporte son leadership stratégique à une plateforme internationale d’élite réunissant ministres des finances, gouverneurs de banques centrales, banques de développement, investisseurs institutionnels et régulateurs pour moderniser les marchés de capitaux mondiaux."}'::jsonb,
-  NULL,
-  0,
+  '{"en":"Global Institutional Board Charter · International Financial Community Platform","fr":"Charte institutionnelle internationale · Plateforme des Marchés Financiers Mondiaux"}'::jsonb,
+  4,
   'published'
 );
 INSERT INTO public.career_entries (id, organization, role_title, category, period, is_current, location, description, verification_source, display_order, status)
@@ -973,8 +971,8 @@ VALUES (
   true,
   'United States',
   '{"en":"Provides independent financial leadership, capital structuring, blended finance advisory, and fiduciary governance oversight to empower underserved communities through entrepreneurship and capital access.","fr":"Apporte un leadership financier indépendant, une expertise en structuration de capital et en finance mixte pour soutenir l’entrepreneuriat et l’inclusion économique des communautés mal desservies."}'::jsonb,
-  NULL,
-  0,
+  '{"en":"US Non-Executive Board Appointment · GNCI Governance Charter","fr":"Mandat d’administrateur non-exécutif · Charte de gouvernance GNCI"}'::jsonb,
+  5,
   'published'
 );
 INSERT INTO public.career_entries (id, organization, role_title, category, period, is_current, location, description, verification_source, display_order, status)
@@ -987,8 +985,8 @@ VALUES (
   true,
   'New York, US / Yaoundé, Cameroon',
   '{"en":"Leads sovereign green bond advocacy, sustainable finance taxonomy harmonization, and debt resilience frameworks in partnership with UNDP and the Global Environment Facility (GEF).","fr":"Pilote le plaidoyer pour les obligations vertes souveraines, l’harmonisation des taxonomies de finance durable et les cadres de résilience de la dette avec le PNUD et le FEM."}'::jsonb,
-  NULL,
-  0,
+  '{"en":"Multilateral climate finance designation · UNDP-GEF Focal Authority","fr":"Désignation multilatérale en finance durable · Autorité focale PNUD-FEM"}'::jsonb,
+  6,
   'published'
 );
 INSERT INTO public.career_entries (id, organization, role_title, category, period, is_current, location, description, verification_source, display_order, status)
@@ -1001,8 +999,8 @@ VALUES (
   false,
   'Libreville, Gabon / CEMAC Zone',
   '{"en":"Represented the State of Cameroon on the regional market supervisory board, safeguarding public savings, overseeing the unified BVMAC stock exchange, and regulating financial intermediaries across six CEMAC nations.","fr":"A représenté l’État du Cameroun au collège de surveillance du marché financier régional, veillant à la protection de l’épargne, à la régulation de la BVMAC et au contrôle des intermédiaires agréés dans les six pays de la CEMAC."}'::jsonb,
-  NULL,
-  0,
+  '{"en":"CEMAC Regional Regulatory Protocol · Formal Sovereign Appointment","fr":"Protocole réglementaire CEMAC · Décret officiel de nomination de l’État"}'::jsonb,
+  7,
   'published'
 );
 INSERT INTO public.career_entries (id, organization, role_title, category, period, is_current, location, description, verification_source, display_order, status)
@@ -1015,8 +1013,8 @@ VALUES (
   false,
   'Yaoundé / CEMAC Sub-Region',
   '{"en":"Executed central bank fiduciary surveillance, sovereign liquidity alignment, and public securities auction oversight across regional financial institutions.","fr":"A exercé les missions de surveillance fiduciaire auprès de la banque centrale, le suivi de la liquidité souveraine et des adjudications de titres publics du Trésor."}'::jsonb,
-  NULL,
-  0,
+  '{"en":"Central Bank Fiduciary Protocol · BEAC Statutory Register","fr":"Protocole de surveillance fiduciaire · Registre statutaire BEAC"}'::jsonb,
+  8,
   'published'
 );
 INSERT INTO public.career_entries (id, organization, role_title, category, period, is_current, location, description, verification_source, display_order, status)
@@ -1029,8 +1027,8 @@ VALUES (
   false,
   'Yaoundé, Cameroon',
   '{"en":"Coordinated multidisciplinary professional teams, program budgeting execution, complex financial systems design, import/export license monetization, and multilateral negotiations with the IMF, CEMAC, and international partners.","fr":"A coordonné des équipes pluridisciplinaires, la réforme du budget-programme, la conception d’outils de monétisation des licences d’import/export et les négociations multilatérales avec le FMI et la CEMAC."}'::jsonb,
-  NULL,
-  0,
+  '{"en":"General Directorate of Treasury Statutory Advisory Record","fr":"Dossier de fonction statutaire · Direction Générale du Trésor"}'::jsonb,
+  9,
   'published'
 );
 INSERT INTO public.career_entries (id, organization, role_title, category, period, is_current, location, description, verification_source, display_order, status)
@@ -1043,8 +1041,8 @@ VALUES (
   false,
   'United Nations System / Country Offices',
   '{"en":"Directed country-level operations, budget management, IPSAS compliance, human resources, procurement integrity, ICT infrastructure, and UN common services administration across multi-donor programs.","fr":"A dirigé les opérations pays, la gestion budgétaire, la conformité aux normes IPSAS, les ressources humaines, l’intégrité des achats et l’administration des services communs du système des Nations Unies."}'::jsonb,
-  NULL,
-  0,
+  '{"en":"United Nations Diplomatic & Operations Record · Award for Meritorious Service","fr":"Dossier diplomatique et opérationnel de l’ONU · Prix pour services méritoires"}'::jsonb,
+  10,
   'published'
 );
 INSERT INTO public.career_entries (id, organization, role_title, category, period, is_current, location, description, verification_source, display_order, status)
@@ -1057,8 +1055,8 @@ VALUES (
   true,
   'Abidjan, Côte d’Ivoire / Regional Operations',
   '{"en":"Oversees forecasting, annual budgeting, variance analysis, financial reporting, and operational audits for major regional development financing interventions.","fr":"Supervise la prévision budgétaire, l’analyse des écarts, le contrôle financier et les audits opérationnels de projets de développement structurants."}'::jsonb,
-  NULL,
-  0,
+  '{"en":"AfDB Institutional Consultancy & Project Supervision Portfolio","fr":"Mandat d’expertise et de coordination fiduciaire · Banque Africaine de Développement"}'::jsonb,
+  11,
   'published'
 );
 INSERT INTO public.career_entries (id, organization, role_title, category, period, is_current, location, description, verification_source, display_order, status)
@@ -1071,8 +1069,8 @@ VALUES (
   true,
   'Yaoundé, Cameroon',
   '{"en":"Trains senior civil servants, state auditors, and financial magistrates in public financial management, forensic auditing, fraud detection, and capital markets.","fr":"Forme les magistrats financiers, inspecteurs d’État et hauts cadres administratifs aux finances publiques, à l’audit judiciaire et à la détection de la fraude."}'::jsonb,
-  NULL,
-  0,
+  '{"en":"Academic Faculty Appointment · ENAM Faculty of Administration","fr":"Corps professoral académique · Faculté d’Administration de l’ENAM"}'::jsonb,
+  12,
   'published'
 );
 INSERT INTO public.career_entries (id, organization, role_title, category, period, is_current, location, description, verification_source, display_order, status)
@@ -1085,8 +1083,8 @@ VALUES (
   true,
   'Namibia / International',
   '{"en":"Curriculum design, postgraduate research supervision, and publishing in peer-reviewed journals on financial forensics, behavioral finance, and cybersecurity intersectionality.","fr":"Conception des cursus doctoraux, direction de recherche et publications scientifiques sur la criminalistique financière, la finance comportementale et la cybersécurité."}'::jsonb,
-  NULL,
-  0,
+  '{"en":"Academic Professorial Chair Appointment · University Senate","fr":"Chaire professorale académique · Sénat Universitaire Copperstone"}'::jsonb,
+  13,
   'published'
 );
 INSERT INTO public.career_entries (id, organization, role_title, category, period, is_current, location, description, verification_source, display_order, status)
@@ -1099,8 +1097,8 @@ VALUES (
   true,
   'Boston, Massachusetts / Minnesota, United States',
   '{"en":"Provides corporate governance, fiduciary audit, mission determination, and risk assessment for emerging blockchain architectures and quantum computing financial infrastructure.","fr":"Assure la gouvernance d’entreprise, la surveillance fiduciaire et l’évaluation des risques technologiques pour les infrastructures financières blockchain et quantiques."}'::jsonb,
-  NULL,
-  0,
+  '{"en":"Corporate Board of Directors Register · Boston & Minnesota","fr":"Registre du Conseil d’Administration · Boston & Minnesota, États-Unis"}'::jsonb,
+  14,
   'published'
 );
 INSERT INTO public.career_entries (id, organization, role_title, category, period, is_current, location, description, verification_source, display_order, status)
@@ -1113,8 +1111,8 @@ VALUES (
   true,
   'Yaoundé, Cameroon',
   '{"en":"Multidisciplinary voluntary initiative founded by alumni of ISMP, IRIC, and ENAM working tirelessly to enhance the performance and ethical standards of African public administrations.","fr":"Initiative panafricaine fondée par les diplômés de l’ISMP, de l’IRIC et de l’ENAM œuvrant pour l’accroissement de la performance et de l’éthique des administrations publiques africaines."}'::jsonb,
-  NULL,
-  0,
+  '{"en":"Pan-African Public Administration Technical Council","fr":"Conseil technique panafricain d’expertise publique"}'::jsonb,
+  15,
   'published'
 );
 INSERT INTO public.career_entries (id, organization, role_title, category, period, is_current, location, description, verification_source, display_order, status)
@@ -1127,8 +1125,8 @@ VALUES (
   false,
   'Yaoundé, Cameroon / United States',
   '{"en":"Founded and presided over a licensed Category II microfinance institution, introducing digital microfinance products to solve financial exclusion and expand borrowing access for SMEs.","fr":"A fondé et présidé un établissement de microfinance de 2ème catégorie agréé, introduisant des solutions numériques pour lutter contre l’exclusion financière et financer les PME."}'::jsonb,
-  NULL,
-  0,
+  '{"en":"Licensed Category II Microfinance Institution Regulatory Charter · COBAC / MINFI","fr":"Agrément réglementaire d’Établissement de Microfinance 2e Catégorie · COBAC / MINFI"}'::jsonb,
+  16,
   'published'
 );
 INSERT INTO public.career_entries (id, organization, role_title, category, period, is_current, location, description, verification_source, display_order, status)
@@ -1141,8 +1139,8 @@ VALUES (
   true,
   'Centre Region, Cameroon',
   '{"en":"Directs community social impact initiatives, youth education bursaries, and ethical leadership programs in public administration and civic responsibility.","fr":"Dirige des initiatives philanthropiques d’impact communautaire, de bourses d’études et de formation au leadership éthique pour la jeunesse."}'::jsonb,
-  NULL,
-  0,
+  '{"en":"Non-Profit Civic Foundation Charter","fr":"Statuts officiels de fondation d’utilité sociale"}'::jsonb,
+  17,
   'published'
 );
 INSERT INTO public.career_entries (id, organization, role_title, category, period, is_current, location, description, verification_source, display_order, status)
@@ -1155,8 +1153,8 @@ VALUES (
   false,
   'Buea / Kumba, South West Region, Cameroon',
   '{"en":"Administered territorial public treasury operations, daily cash provision controls, purchase order and voucher verification, and management accounts production.","fr":"A géré les opérations comptables du Trésor territorial, le contrôle des caisses, le visa des bons d’engagement et la production des comptes de gestion."}'::jsonb,
-  NULL,
-  0,
+  '{"en":"Territorial Public Treasury Administrative Record · MINFI","fr":"Dossier de carrière Trésor Public territorial · MINFI"}'::jsonb,
+  18,
   'published'
 );
 INSERT INTO public.career_entries (id, organization, role_title, category, period, is_current, location, description, verification_source, display_order, status)
@@ -1169,8 +1167,8 @@ VALUES (
   false,
   'Yaoundé / Centre Region, Cameroon',
   '{"en":"Conducted unannounced financial inspections, regularity controls, and management account audits across public organizations and territorial services.","fr":"A conduit des vérifications inopinées, des contrôles de régularité et des audits de comptes de gestion auprès des administrations publiques."}'::jsonb,
-  NULL,
-  0,
+  '{"en":"General Inspectorate of Finance Statutory Inspection Record","fr":"Registre des missions de contrôle · Inspection Générale des Finances"}'::jsonb,
+  19,
   'published'
 );
 INSERT INTO public.career_entries (id, organization, role_title, category, period, is_current, location, description, verification_source, display_order, status)
@@ -1183,8 +1181,8 @@ VALUES (
   false,
   'Buea / North West Region, Cameroon',
   '{"en":"Early executive career directing corporate management, financial software tracking, human resource systems, and client delivery operations.","fr":"Début de carrière de direction générale gérant les ressources financières, l’informatisation des processus et la coordination d’équipes opérationnelles."}'::jsonb,
-  NULL,
-  0,
+  '{"en":"Corporate Management Historical Records","fr":"Registres historiques de direction d’entreprise"}'::jsonb,
+  20,
   'published'
 );
 

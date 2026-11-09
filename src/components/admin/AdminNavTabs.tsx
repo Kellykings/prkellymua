@@ -13,6 +13,7 @@ import {
   ShieldAlert,
   BookMarked,
   PackageCheck,
+  Sparkles,
 } from 'lucide-react';
 
 interface TabItem {
@@ -43,6 +44,11 @@ export function AdminNavTabs({
       id: 'overview',
       label: 'Overview',
       icon: LayoutDashboard,
+    },
+    {
+      id: 'hero',
+      label: 'Hero & Branding',
+      icon: Sparkles,
     },
     {
       id: 'books',

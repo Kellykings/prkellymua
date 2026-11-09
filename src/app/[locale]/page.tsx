@@ -16,6 +16,7 @@ import {
   getMediaAppearances,
   getGalleryPhotos,
   getInstitutionalEvents,
+  getHeroConfig,
 } from '@/lib/data/repository';
 import { EpicEventGallery } from '@/components/home/EpicEventGallery';
 import { getDictionary } from '@/lib/i18n/dictionaries';
@@ -95,6 +96,22 @@ export default async function HomePage({
   const mediaList = getMediaAppearances();
   const galleryPhotos = getGalleryPhotos();
   const upcomingEvents = getInstitutionalEvents('upcoming');
+  const heroConfig = await getHeroConfig();
+
+  const heroEyebrow = heroConfig.eyebrow?.[locale] || dict.hero.eyebrow;
+  const heroHeadline = heroConfig.headline?.[locale] || dict.hero.headline;
+  const heroSubheadline = heroConfig.subheadline?.[locale] || dict.hero.subheadline;
+  const heroCtaPrimary = heroConfig.ctaPrimary?.[locale] || dict.hero.ctaPrimary;
+  const heroCtaPrimaryLink = heroConfig.ctaPrimaryLink || '/books';
+  const heroCtaSecondary = heroConfig.ctaSecondary?.[locale] || dict.hero.ctaSecondary;
+  const heroCtaSecondaryLink = heroConfig.ctaSecondaryLink || '/about';
+  const heroRole1 = heroConfig.role1?.[locale] || dict.hero.role1;
+  const heroRole2 = heroConfig.role2?.[locale] || dict.hero.role2;
+  const heroRole3 = heroConfig.role3?.[locale] || dict.hero.role3;
+  const heroIndependenceText = heroConfig.independenceText?.[locale] || dict.hero.independenceText;
+  const heroIndependenceLinkText = heroConfig.independenceLinkText?.[locale] || dict.hero.independenceLink;
+  const heroCaption = heroConfig.caption?.[locale] || dict.hero.caption;
+  const heroPortraitUrl = heroConfig.portraitImageUrl || '/images/portrait.jpeg';
 
   const jsonLd = {
     '@context': 'https://schema.org',
@@ -125,32 +142,32 @@ export default async function HomePage({
             {/* Primary Narrative Column (7/12) */}
             <div className="lg:col-span-7 space-y-6">
               <div className="editorial-kicker-dark">
-                {dict.hero.eyebrow}
+                {heroEyebrow}
               </div>
 
               <h1 className="text-3xl sm:text-4xl lg:text-[2.75rem] xl:text-[3.25rem] font-serif font-semibold tracking-normal text-white leading-display [text-wrap:balance] max-w-[24ch]">
-                {dict.hero.headline}
+                {heroHeadline}
               </h1>
 
               <p className="text-base sm:text-lg text-slate-300 leading-[1.6] tracking-normal max-w-[60ch]">
-                {renderHeroSubheadlineWithAbbr(dict.hero.subheadline, locale)}
+                {renderHeroSubheadlineWithAbbr(heroSubheadline, locale)}
               </p>
 
               {/* CTAs Placed Immediately Under Lead (Mobile-First: Visible on First Screen) */}
               <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4 pt-1">
                 <Link
-                  href={`/${locale}/books`}
+                  href={heroCtaPrimaryLink.startsWith('http') ? heroCtaPrimaryLink : `/${locale}${heroCtaPrimaryLink.startsWith('/') ? heroCtaPrimaryLink : `/${heroCtaPrimaryLink}`}`}
                   className="inline-flex items-center justify-center gap-2 h-12 px-6 bg-gold-500 hover:bg-gold-400 text-navy-950 font-semibold text-sm tracking-normal transition-colors"
                 >
-                  <span>{dict.hero.ctaPrimary}</span>
+                  <span>{heroCtaPrimary}</span>
                   <ArrowRight className="w-4 h-4 shrink-0" />
                 </Link>
 
                 <Link
-                  href={`/${locale}/about`}
+                  href={heroCtaSecondaryLink.startsWith('http') ? heroCtaSecondaryLink : `/${locale}${heroCtaSecondaryLink.startsWith('/') ? heroCtaSecondaryLink : `/${heroCtaSecondaryLink}`}`}
                   className="inline-flex items-center justify-center gap-2 h-12 px-6 bg-transparent hover:bg-white/5 text-white border border-white/30 hover:border-gold-400 font-medium text-sm transition-colors"
                 >
-                  <span>{dict.hero.ctaSecondary}</span>
+                  <span>{heroCtaSecondary}</span>
                 </Link>
               </div>
 
@@ -159,27 +176,27 @@ export default async function HomePage({
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 sm:gap-3 text-xs sm:text-[13px] text-slate-200">
                   <div className="flex items-start gap-2">
                     <span className="w-1.5 h-1.5 rounded-full bg-gold-400 shrink-0 mt-1.5" />
-                    <span>{dict.hero.role1}</span>
+                    <span>{heroRole1}</span>
                   </div>
                   <div className="flex items-start gap-2">
                     <span className="w-1.5 h-1.5 rounded-full bg-gold-400 shrink-0 mt-1.5" />
-                    <span>{dict.hero.role2}</span>
+                    <span>{heroRole2}</span>
                   </div>
                   <div className="flex items-start gap-2">
                     <span className="w-1.5 h-1.5 rounded-full bg-gold-400 shrink-0 mt-1.5" />
-                    <span>{dict.hero.role3}</span>
+                    <span>{heroRole3}</span>
                   </div>
                 </div>
               </div>
 
               {/* Plain-Language Statutory Independence Line (No External ↗ Icon) */}
               <div className="pt-2 border-t border-white/10 text-xs sm:text-[13px] text-slate-300 leading-relaxed flex flex-wrap items-center gap-x-2 gap-y-1">
-                <span>{dict.hero.independenceText}</span>
+                <span>{heroIndependenceText}</span>
                 <Link
                   href={`/${locale}/legal/disclaimer`}
                   className="text-gold-400 hover:text-gold-300 underline underline-offset-4 font-medium transition-colors"
                 >
-                  {dict.hero.independenceLink}
+                  {heroIndependenceLinkText}
                 </Link>
               </div>
             </div>
@@ -189,8 +206,8 @@ export default async function HomePage({
               <figure className="w-full max-w-sm border border-gold-500/35 bg-navy-950 shadow-elevated overflow-hidden">
                 <div className="relative aspect-[4/5] w-full max-h-[65vh] bg-navy-950">
                   <Image
-                    src="/images/portrait.jpeg"
-                    alt={`${profile.fullName} — ${dict.hero.caption}`}
+                    src={heroPortraitUrl}
+                    alt={`${profile.fullName} — ${heroCaption}`}
                     fill
                     priority
                     sizes="(max-width: 640px) 90vw, (max-width: 1024px) 384px, 420px"
@@ -210,7 +227,7 @@ export default async function HomePage({
                       {profile.fullName}
                     </div>
                     <div className="text-xs text-gold-400 font-medium leading-snug">
-                      {dict.hero.caption}
+                      {heroCaption}
                     </div>
                     <div className="text-xs text-slate-300 leading-snug">
                       {profile.honorifics}

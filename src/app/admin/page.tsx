@@ -9,6 +9,7 @@ import {
   getMediaAppearances,
   getGalleryPhotos,
   getInstitutionalEvents,
+  getHeroConfig,
 } from '@/lib/data/repository';
 import { getCustomEntityItems, getContentStoreHealth } from '@/lib/data/custom-content-store';
 import { createSupabaseAdminClient } from '@/lib/supabase/admin';
@@ -16,6 +17,7 @@ import { verifyAdminSessionToken, ADMIN_COOKIE_NAME } from '@/lib/auth/admin-aut
 import { AdminHeader } from '@/components/admin/AdminHeader';
 import { AdminNavTabs } from '@/components/admin/AdminNavTabs';
 import { AdminOverviewSection } from '@/components/admin/AdminOverviewSection';
+import { AdminHeroSection } from '@/components/admin/AdminHeroSection';
 import { AdminBooksSection } from '@/components/admin/AdminBooksSection';
 import { AdminBlogSection } from '@/components/admin/AdminBlogSection';
 import { AdminGovernanceSection } from '@/components/admin/AdminGovernanceSection';
@@ -92,6 +94,7 @@ export default async function AdminStudioPage({
   }
 
   const initialOrders = getCustomEntityItems<PrintDeliveryOrder>('orders');
+  const heroConfig = await getHeroConfig();
 
   return (
     <div className="min-h-screen bg-sand-50/50 text-ink-900 pb-16">
@@ -116,6 +119,13 @@ export default async function AdminStudioPage({
             careers={careers}
             media={media}
             galleryCount={photos.length}
+            isSupabaseConfigured={isSupabaseConfigured}
+          />
+        )}
+
+        {activeTab === 'hero' && (
+          <AdminHeroSection
+            initialConfig={heroConfig}
             isSupabaseConfigured={isSupabaseConfigured}
           />
         )}

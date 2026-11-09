@@ -1,4 +1,4 @@
-import { describe, it, expect } from 'vitest';
+import { describe, it, expect, beforeEach } from 'vitest';
 import crypto from 'crypto';
 import {
   getBooks,
@@ -8,8 +8,31 @@ import {
   getGalleryPhotos,
   getInstitutionalEvents,
 } from '@/lib/data/repository';
+import { saveContentOverrides } from '@/lib/data/custom-content-store';
+
+const CLEAN_STORE = {
+  books: [],
+  blog: [],
+  governance: [],
+  media: [],
+  gallery: [],
+  inquiries: [],
+  orders: [],
+  deletedIds: {
+    books: [],
+    blog: [],
+    governance: [],
+    media: [],
+    gallery: [],
+    inquiries: [],
+    orders: [],
+  },
+};
 
 describe('Admin Studio E2E Data Wiring & Integrity', () => {
+  beforeEach(() => {
+    saveContentOverrides(CLEAN_STORE);
+  });
   it('should wire all 11 monographic volumes to the admin studio inventory', async () => {
     const books = await getBooks();
     expect(books).toHaveLength(11);

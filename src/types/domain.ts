@@ -226,3 +226,21 @@ export interface PrintDeliveryOrder {
   updated_at?: string;
 }
 
+export interface HeroCopyConfig {
+  eyebrow: LocalizedString;
+  headline: LocalizedString;
+  subheadline: LocalizedString;
+  ctaPrimary: LocalizedString;
+  ctaPrimaryLink?: string;
+  ctaSecondary: LocalizedString;
+  ctaSecondaryLink?: string;
+  role1: LocalizedString;
+  role2: LocalizedString;
+  role3: LocalizedString;
+  independenceText: LocalizedString;
+  independenceLinkText: LocalizedString;
+  caption: LocalizedString;
+  portraitImageUrl?: string;
+  updated_at?: string;
+}
+
