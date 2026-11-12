@@ -11,6 +11,7 @@ import {
 } from '@/lib/data/custom-content-store';
 import { verifyAdminRequest } from '@/lib/auth/admin-auth';
 import { createSupabaseAdminClient } from '@/lib/supabase/admin';
+import { OFFICIAL_PAYMENT_CONFIG } from '@/lib/data/payment-config';
 
 export const dynamic = 'force-dynamic';
 
@@ -76,6 +77,18 @@ export async function POST(request: Request) {
     const qty = Math.max(1, Math.min(20, Number(quantity) || 1));
     const totalXaf = (Number(unitPriceXaf) || 73955) * qty;
 
+    const validMethods: LocalPaymentMethod[] = ['momo', 'orange_money', 'cash_delivery', 'card'];
+    const chosenPaymentMethod: LocalPaymentMethod = validMethods.includes(paymentMethod)
+      ? (paymentMethod as LocalPaymentMethod)
+      : 'momo';
+
+    let defaultRef = 'PENDING_MOMO_VERIFICATION';
+    if (chosenPaymentMethod === 'orange_money') {
+      defaultRef = 'PENDING_OM_VERIFICATION';
+    } else if (chosenPaymentMethod === 'cash_delivery') {
+      defaultRef = 'CASH_ON_DELIVERY';
+    }
+
     const orderNumber = `ORD-KMK-${new Date().getFullYear()}-${Math.random().toString(36).slice(2, 7).toUpperCase()}`;
     const newOrder: PrintDeliveryOrder = {
       id: `ord-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`,
@@ -95,9 +108,9 @@ export async function POST(request: Request) {
       delivery_city: deliveryCity.trim(),
       delivery_address: deliveryAddress.trim(),
       delivery_notes: deliveryNotes ? String(deliveryNotes).trim() : undefined,
-      payment_method: (paymentMethod as LocalPaymentMethod) || 'momo',
-      payment_reference: paymentReference ? String(paymentReference).trim() : 'PENDING_MOMO_VERIFICATION',
-      status: paymentMethod === 'cash_delivery' ? 'pending_verification' : 'pending_verification',
+      payment_method: chosenPaymentMethod,
+      payment_reference: paymentReference ? String(paymentReference).trim() : defaultRef,
+      status: 'pending_verification',
       created_at: new Date().toISOString(),
     };
 
@@ -137,9 +150,28 @@ export async function POST(request: Request) {
     // 2. Save to atomic local store
     addCustomEntityItem('orders', newOrder);
 
+    const paymentInstructions = chosenPaymentMethod === 'momo'
+      ? {
+          provider: OFFICIAL_PAYMENT_CONFIG.momo.provider,
+          official_number: OFFICIAL_PAYMENT_CONFIG.momo.number,
+          recipient: OFFICIAL_PAYMENT_CONFIG.momo.recipientName.en,
+          ussd_code: OFFICIAL_PAYMENT_CONFIG.momo.ussdCode,
+          amount_xaf: totalXaf,
+        }
+      : chosenPaymentMethod === 'orange_money'
+      ? {
+          provider: OFFICIAL_PAYMENT_CONFIG.orange_money.provider,
+          official_number: OFFICIAL_PAYMENT_CONFIG.orange_money.number,
+          recipient: OFFICIAL_PAYMENT_CONFIG.orange_money.recipientName.en,
+          ussd_code: OFFICIAL_PAYMENT_CONFIG.orange_money.ussdCode,
+          amount_xaf: totalXaf,
+        }
+      : null;
+
     return NextResponse.json({
       ok: true,
       order: newOrder,
+      payment_instructions: paymentInstructions,
       message: 'Print delivery order successfully received and dispatched to Admin Studio.',
     });
   } catch (err: unknown) {

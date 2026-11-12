@@ -638,7 +638,7 @@ export function AdminGuideSection({
                     <span>Verify Mobile Money Receipt</span>
                   </div>
                   <p className="leading-relaxed">
-                    Under <strong>Orders &amp; Deliveries</strong>, open incoming orders. Check the customer&apos;s submitted Transaction ID against SMS receipts received on the secretariat merchant lines: <strong>MTN MoMo (+237 677 22 44 66)</strong> or <strong>Orange Money (+237 699 22 44 66)</strong>.
+                    Under <strong>Orders &amp; Deliveries</strong>, open incoming orders. Check the customer&apos;s submitted Transaction ID against SMS receipts received on the secretariat merchant lines: <strong>MTN MoMo (+237 677 6580 510)</strong> or <strong>Orange Money (+237 694 228 055)</strong>.
                   </p>
                 </div>
 

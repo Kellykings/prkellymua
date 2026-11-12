@@ -511,6 +511,16 @@ export function AdminOrdersSection({ initialOrders }: AdminOrdersSectionProps) {
                       ? 'Orange Money'
                       : 'Cash on Delivery'}
                   </div>
+                  {selectedOrder.payment_method === 'momo' && (
+                    <div className="text-[11px] text-ink-600 font-mono mt-0.5">
+                      Secretariat Merchant Line: <strong>+237 677 6580 510</strong>
+                    </div>
+                  )}
+                  {selectedOrder.payment_method === 'orange_money' && (
+                    <div className="text-[11px] text-ink-600 font-mono mt-0.5">
+                      Secretariat Merchant Line: <strong>+237 694 228 055</strong>
+                    </div>
+                  )}
                   <div className="font-mono text-bronze-700 mt-0.5">
                     Tx Reference: <strong>{selectedOrder.payment_reference}</strong>
                   </div>
@@ -633,7 +643,7 @@ export function AdminOrdersSection({ initialOrders }: AdminOrdersSectionProps) {
                     rows={3}
                     value={editAdminNotes}
                     onChange={(e) => setEditAdminNotes(e.target.value)}
-                    placeholder="e.g. Verified 73,955 FCFA on MTN MoMo (+237 677 22 44 66). Handed to VIP Courier Yaoundé dispatch #8912."
+                    placeholder="e.g. Verified 73,955 FCFA on MTN MoMo (+237 677 6580 510). Handed to VIP Courier Yaoundé dispatch #8912."
                     className="w-full p-2.5 border border-surface-border text-xs text-navy-900 focus:outline-none focus:border-navy-900"
                   />
                 </div>

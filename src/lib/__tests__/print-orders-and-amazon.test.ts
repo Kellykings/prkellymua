@@ -3,6 +3,7 @@ import { SEED_BOOKS } from '@/lib/data/seed-data';
 import { POST as orderPOST, GET as orderGET, PATCH as orderPATCH } from '@/app/api/orders/route';
 import { createAdminSessionToken, ADMIN_COOKIE_NAME } from '@/lib/auth/admin-auth';
 import { saveContentOverrides, getCustomEntityItems } from '@/lib/data/custom-content-store';
+import { OFFICIAL_PAYMENT_CONFIG } from '@/lib/data/payment-config';
 import type { PrintDeliveryOrder } from '@/types/domain';
 
 const CLEAN_STORE = {
@@ -130,10 +131,22 @@ describe('Paul Biya Amazon Retailer & Print Delivery Fulfillment Suite', () => {
     expect(data.order.payment_method).toBe('momo');
     expect(data.order.payment_reference).toBe('MP261108.1402.G71829');
 
+    // Confirm official payment numbers returned in instructions
+    expect(data.payment_instructions).toBeDefined();
+    expect(data.payment_instructions.official_number).toBe('+237 677 6580 510');
+    expect(data.payment_instructions.ussd_code).toBe('*126#');
+
     // Confirm it persisted in custom store
     const storedOrders = getCustomEntityItems<PrintDeliveryOrder>('orders');
     expect(storedOrders.length).toBe(1);
     expect(storedOrders[0].customer_name).toBe('Prof. Joseph Ngu');
+  });
+
+  it('validates official Mobile Money payment configuration', () => {
+    expect(OFFICIAL_PAYMENT_CONFIG.momo.number).toBe('+237 677 6580 510');
+    expect(OFFICIAL_PAYMENT_CONFIG.momo.ussdCode).toBe('*126#');
+    expect(OFFICIAL_PAYMENT_CONFIG.orange_money.number).toBe('+237 694 228 055');
+    expect(OFFICIAL_PAYMENT_CONFIG.orange_money.ussdCode).toBe('#150#');
   });
 
   it('allows authenticated admin to update order fulfillment status from pending to payment_confirmed, dispatched, and delivered', async () => {

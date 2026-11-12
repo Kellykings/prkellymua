@@ -12,6 +12,9 @@ import {
   Smartphone,
   PackageCheck,
   RotateCcw,
+  Copy,
+  Check,
+  PhoneCall,
 } from 'lucide-react';
 import type {
   BookFormat,
@@ -21,6 +24,7 @@ import type {
 } from '@/types/domain';
 import { formatDualPrice, formatFormatLabel } from '@/lib/utils';
 import { getDictionary } from '@/lib/i18n/dictionaries';
+import { OFFICIAL_PAYMENT_CONFIG } from '@/lib/data/payment-config';
 
 interface BookPurchaseSectionProps {
   bookId: string;
@@ -43,7 +47,9 @@ export function BookPurchaseSection({
   const dict = getDictionary(locale);
   const [activeTab, setActiveTab] = useState<'direct' | 'retailers'>('direct');
   const [selectedFormatId, setSelectedFormatId] = useState<string>(
-    directFormats[0]?.id || ''
+    directFormats.find((f) => f.format.startsWith('physical_'))?.id ||
+      directFormats[0]?.id ||
+      ''
   );
 
   // Common customer fields
@@ -66,6 +72,18 @@ export function BookPurchaseSection({
   // Confirmation state for physical orders
   const [confirmedOrder, setConfirmedOrder] =
     useState<PrintDeliveryOrder | null>(null);
+  const [copiedNumber, setCopiedNumber] = useState<string | null>(null);
+
+  const handleCopyNumber = async (num: string) => {
+    try {
+      await navigator.clipboard.writeText(num);
+      setCopiedNumber(num);
+      setTimeout(() => setCopiedNumber(null), 2500);
+    } catch {
+      setCopiedNumber(num);
+      setTimeout(() => setCopiedNumber(null), 2500);
+    }
+  };
 
   const [loading, setLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
@@ -373,9 +391,7 @@ export function BookPurchaseSection({
                     : 'to coordinate the exact courier dispatch and handover window.'}
                 </p>
                 <div className="pt-2 text-[11px] font-mono text-slate-400">
-                  {locale === 'fr'
-                    ? 'Contact support direct du Secrétariat : (+237) 677 22 44 66 / (+237) 699 22 44 66'
-                    : 'Direct Secretariat Support Line: (+237) 677 22 44 66 / (+237) 699 22 44 66'}
+                  {OFFICIAL_PAYMENT_CONFIG.secretariatSupportLines[locale]}
                 </div>
               </div>
 
@@ -662,54 +678,139 @@ export function BookPurchaseSection({
                   </div>
 
                   {/* Local Mobile Money Merchant Numbers Panel */}
-                  <div className="bg-sand-50 border border-gold-500/40 p-4 space-y-2 text-xs text-navy-900">
-                    <div className="font-semibold text-navy-900 flex items-center gap-1.5">
-                      <Smartphone className="w-4 h-4 text-bronze-600" />
-                      <span>
-                        {locale === 'fr'
-                          ? 'Coordonnées de Règlement Mobile Money Officiel'
-                          : 'Official Mobile Money Payment Numbers'}
+                  <div className="bg-sand-50 border border-gold-500/40 p-4 space-y-3 text-xs text-navy-900 rounded-sm">
+                    <div className="font-semibold text-navy-900 flex items-center justify-between">
+                      <div className="flex items-center gap-1.5">
+                        <Smartphone className="w-4 h-4 text-bronze-600" />
+                        <span className="font-serif">
+                          {locale === 'fr'
+                            ? 'Numéros Officiels Mobile Money'
+                            : 'Official Mobile Money Payment Numbers'}
+                        </span>
+                      </div>
+                      <span className="text-[10px] font-mono uppercase bg-gold-500/20 text-navy-900 px-2 py-0.5 rounded-xs font-semibold">
+                        {locale === 'fr' ? 'Compte Vérifié' : 'Verified Merchant'}
                       </span>
                     </div>
 
                     {paymentMethod === 'momo' && (
-                      <div className="space-y-1 bg-white p-3 border border-surface-border">
-                        <div className="font-mono font-bold text-sm text-navy-900 flex items-center justify-between">
-                          <span>MTN MoMo : (+237) 677 22 44 66</span>
-                          <span className="text-[11px] px-2 py-0.5 bg-yellow-100 text-yellow-900 font-sans font-bold">
-                            MTN
-                          </span>
+                      <div className="space-y-2 bg-white p-3.5 border border-surface-border rounded-sm shadow-xs">
+                        <div className="flex items-center justify-between gap-2">
+                          <div className="space-y-0.5">
+                            <div className="text-[10px] uppercase font-bold tracking-wider text-amber-800">
+                              MTN Mobile Money (MoMo)
+                            </div>
+                            <div className="font-mono font-bold text-base text-navy-950 flex items-center gap-2">
+                              <span>{OFFICIAL_PAYMENT_CONFIG.momo.number}</span>
+                            </div>
+                          </div>
+                          <div className="flex items-center gap-1.5">
+                            <button
+                              type="button"
+                              onClick={() => handleCopyNumber(OFFICIAL_PAYMENT_CONFIG.momo.number)}
+                              className="px-2.5 py-1.5 bg-yellow-400 hover:bg-yellow-300 text-navy-950 font-semibold text-xs rounded-xs flex items-center gap-1 transition-colors"
+                              title={locale === 'fr' ? 'Copier le numéro' : 'Copy number'}
+                            >
+                              {copiedNumber === OFFICIAL_PAYMENT_CONFIG.momo.number ? (
+                                <>
+                                  <Check className="w-3.5 h-3.5" />
+                                  <span>{locale === 'fr' ? 'Copié !' : 'Copied!'}</span>
+                                </>
+                              ) : (
+                                <>
+                                  <Copy className="w-3.5 h-3.5" />
+                                  <span>{locale === 'fr' ? 'Copier' : 'Copy'}</span>
+                                </>
+                              )}
+                            </button>
+                            <a
+                              href={OFFICIAL_PAYMENT_CONFIG.momo.telUri}
+                              className="px-2.5 py-1.5 border border-surface-border hover:bg-surface-light text-navy-900 font-semibold text-xs rounded-xs flex items-center gap-1 transition-colors"
+                              title={locale === 'fr' ? 'Composer sur mobile' : 'Dial on phone'}
+                            >
+                              <PhoneCall className="w-3.5 h-3.5" />
+                              <span>{locale === 'fr' ? 'Appeler' : 'Dial'}</span>
+                            </a>
+                          </div>
                         </div>
-                        <div className="text-[11px] text-ink-600">
-                          {locale === 'fr'
-                            ? 'Bénéficiaire : Secrétariat Général · Cabinet Pr. Kelly Mua Kingsly'
-                            : 'Recipient: General Secretariat · Office of Prof. Kelly Mua Kingsly'}
+
+                        <div className="pt-1 border-t border-surface-border/60 text-[11px] text-ink-600 flex flex-col sm:flex-row sm:items-center justify-between gap-1">
+                          <div>
+                            <span className="font-medium text-navy-900">
+                              {locale === 'fr' ? 'Bénéficiaire : ' : 'Payee: '}
+                            </span>
+                            <span>{OFFICIAL_PAYMENT_CONFIG.momo.recipientName[locale]}</span>
+                          </div>
+                          <div className="font-mono text-bronze-700 font-semibold">
+                            {locale === 'fr' ? 'Code USSD : *126#' : 'USSD Code: *126#'}
+                          </div>
                         </div>
-                        <div className="text-[11px] text-ink-500">
+
+                        <div className="text-[11px] text-ink-500 font-medium">
                           {locale === 'fr'
-                            ? `Montant à transférer : ${totalXafFormatted} FCFA`
-                            : `Amount to transfer: ${totalXafFormatted} FCFA`}
+                            ? `Montant exact à transférer : ${totalXafFormatted} FCFA`
+                            : `Exact amount to transfer: ${totalXafFormatted} FCFA`}
                         </div>
                       </div>
                     )}
 
                     {paymentMethod === 'orange_money' && (
-                      <div className="space-y-1 bg-white p-3 border border-surface-border">
-                        <div className="font-mono font-bold text-sm text-navy-900 flex items-center justify-between">
-                          <span>Orange Money : (+237) 699 22 44 66</span>
-                          <span className="text-[11px] px-2 py-0.5 bg-orange-100 text-orange-900 font-sans font-bold">
-                            Orange
-                          </span>
+                      <div className="space-y-2 bg-white p-3.5 border border-surface-border rounded-sm shadow-xs">
+                        <div className="flex items-center justify-between gap-2">
+                          <div className="space-y-0.5">
+                            <div className="text-[10px] uppercase font-bold tracking-wider text-orange-800">
+                              Orange Money (OM)
+                            </div>
+                            <div className="font-mono font-bold text-base text-navy-950 flex items-center gap-2">
+                              <span>{OFFICIAL_PAYMENT_CONFIG.orange_money.number}</span>
+                            </div>
+                          </div>
+                          <div className="flex items-center gap-1.5">
+                            <button
+                              type="button"
+                              onClick={() => handleCopyNumber(OFFICIAL_PAYMENT_CONFIG.orange_money.number)}
+                              className="px-2.5 py-1.5 bg-orange-500 hover:bg-orange-400 text-white font-semibold text-xs rounded-xs flex items-center gap-1 transition-colors"
+                              title={locale === 'fr' ? 'Copier le numéro' : 'Copy number'}
+                            >
+                              {copiedNumber === OFFICIAL_PAYMENT_CONFIG.orange_money.number ? (
+                                <>
+                                  <Check className="w-3.5 h-3.5" />
+                                  <span>{locale === 'fr' ? 'Copié !' : 'Copied!'}</span>
+                                </>
+                              ) : (
+                                <>
+                                  <Copy className="w-3.5 h-3.5" />
+                                  <span>{locale === 'fr' ? 'Copier' : 'Copy'}</span>
+                                </>
+                              )}
+                            </button>
+                            <a
+                              href={OFFICIAL_PAYMENT_CONFIG.orange_money.telUri}
+                              className="px-2.5 py-1.5 border border-surface-border hover:bg-surface-light text-navy-900 font-semibold text-xs rounded-xs flex items-center gap-1 transition-colors"
+                              title={locale === 'fr' ? 'Composer sur mobile' : 'Dial on phone'}
+                            >
+                              <PhoneCall className="w-3.5 h-3.5" />
+                              <span>{locale === 'fr' ? 'Appeler' : 'Dial'}</span>
+                            </a>
+                          </div>
                         </div>
-                        <div className="text-[11px] text-ink-600">
-                          {locale === 'fr'
-                            ? 'Bénéficiaire : Secrétariat Général · Cabinet Pr. Kelly Mua Kingsly'
-                            : 'Recipient: General Secretariat · Office of Prof. Kelly Mua Kingsly'}
+
+                        <div className="pt-1 border-t border-surface-border/60 text-[11px] text-ink-600 flex flex-col sm:flex-row sm:items-center justify-between gap-1">
+                          <div>
+                            <span className="font-medium text-navy-900">
+                              {locale === 'fr' ? 'Bénéficiaire : ' : 'Payee: '}
+                            </span>
+                            <span>{OFFICIAL_PAYMENT_CONFIG.orange_money.recipientName[locale]}</span>
+                          </div>
+                          <div className="font-mono text-orange-700 font-semibold">
+                            {locale === 'fr' ? 'Code USSD : #150#' : 'USSD Code: #150#'}
+                          </div>
                         </div>
-                        <div className="text-[11px] text-ink-500">
+
+                        <div className="text-[11px] text-ink-500 font-medium">
                           {locale === 'fr'
-                            ? `Montant à transférer : ${totalXafFormatted} FCFA`
-                            : `Amount to transfer: ${totalXafFormatted} FCFA`}
+                            ? `Montant exact à transférer : ${totalXafFormatted} FCFA`
+                            : `Exact amount to transfer: ${totalXafFormatted} FCFA`}
                         </div>
                       </div>
                     )}

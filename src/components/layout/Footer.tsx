@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { ArrowRight } from 'lucide-react';
 import type { Locale } from '@/types/domain';
 import { getDictionary } from '@/lib/i18n/dictionaries';
@@ -42,8 +43,14 @@ export function Footer({ locale }: FooterProps) {
           {/* Column 1: Executive Identity */}
           <div className="sm:col-span-2 lg:col-span-5 space-y-4">
             <div className="flex items-center gap-3">
-              <div className="w-9 h-9 bg-navy-900 border border-gold-500/50 flex items-center justify-center font-serif font-bold text-gold-400 text-sm tracking-widest">
-                KMK
+              <div className="relative w-10 h-10 shrink-0 bg-navy-900 border border-gold-500/50 flex items-center justify-center p-1 rounded-xs overflow-hidden">
+                <Image
+                  src="/logos/03-emblem-only.webp"
+                  alt="KMK Sovereign Seal"
+                  width={40}
+                  height={40}
+                  className="w-full h-full object-contain"
+                />
               </div>
               <div>
                 <div className="font-serif font-bold text-base sm:text-lg text-white">

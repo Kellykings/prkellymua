@@ -30,6 +30,15 @@ export async function generateMetadata({
         fr: '/fr',
       },
     },
+    icons: {
+      icon: [
+        { url: '/logos/04-favicon-app-icon.webp', type: 'image/webp' },
+        { url: '/logos/04-favicon-app-icon.png', type: 'image/png' },
+      ],
+      apple: [
+        { url: '/logos/04-favicon-app-icon.png' },
+      ],
+    },
   };
 }
 

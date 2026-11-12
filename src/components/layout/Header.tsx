@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { Globe, Menu, X, ArrowRight } from 'lucide-react';
 import type { Locale } from '@/types/domain';
@@ -114,8 +115,15 @@ export function Header({ locale }: HeaderProps) {
               aria-current={pathname === `/${locale}` ? 'page' : undefined}
               className="flex items-center gap-2 sm:gap-2.5 shrink-0 group focus-visible:outline focus-visible:outline-2 focus-visible:outline-gold-400 focus-visible:outline-offset-2 rounded-sm"
             >
-              <div className="w-9 h-9 sm:w-10 sm:h-10 p-1.5 shrink-0 bg-navy-950 border border-gold-500/50 flex items-center justify-center font-serif font-semibold text-gold-400 text-sm sm:text-base tracking-wider group-hover:border-gold-300 transition-colors">
-                KMK
+              <div className="relative w-9 h-9 sm:w-10 sm:h-10 shrink-0 bg-navy-950 border border-gold-500/50 flex items-center justify-center p-1 group-hover:border-gold-300 transition-colors overflow-hidden rounded-xs">
+                <Image
+                  src="/logos/03-emblem-only.webp"
+                  alt="KMK Sovereign Seal"
+                  width={36}
+                  height={36}
+                  className="w-full h-full object-contain"
+                  priority
+                />
               </div>
               <div className="min-w-0">
                 <div className="font-serif font-semibold text-sm sm:text-base md:text-lg tracking-normal text-white whitespace-nowrap">
