@@ -4,7 +4,7 @@
 -- Compatible with Supabase PostgreSQL (Dashboard -> SQL Editor)
 -- ==============================================================================
 
--- 1. BOOKS & MONOGRAPHIC TREATISES (11 Volumes)
+-- 1. BOOKS & MONOGRAPHIC TREATISES (17 Volumes)
 INSERT INTO public.books (id, slug, isbn, title, subtitle, synopsis, academic_category, cover_image_url, total_pages, publish_date, publisher, chapters, is_featured, status)
 VALUES (
   uuid_generate_v4(),
@@ -452,6 +452,240 @@ FROM public.books WHERE slug = 'mind-the-gap-bottom-line-and-ethical-behaviour';
 INSERT INTO public.third_party_retailers (book_id, platform_name, retail_url, is_active)
 SELECT id, 'Amazon Global', 'https://www.amazon.com/s?k=Kelly+Mua+Kingsly+Mind+the+Gap+Volkswagen', true
 FROM public.books WHERE slug = 'mind-the-gap-bottom-line-and-ethical-behaviour';
+INSERT INTO public.books (id, slug, isbn, title, subtitle, synopsis, academic_category, cover_image_url, total_pages, publish_date, publisher, chapters, is_featured, status)
+VALUES (
+  uuid_generate_v4(),
+  'tokenization-unlocking-africas-wealth',
+  '978-2-487-19828-2',
+  '{"en":"Tokenization: Unlocking Africa’s Wealth","fr":"Tokenisation : Libérer la Richesse de l’Afrique"}'::jsonb,
+  '{"en":"Asset Fractionalization, Sovereign Resources, and Digital Capital Formation","fr":"Fractionnement d’Actifs, Ressources Souveraines et Formation Numérique de Capital"}'::jsonb,
+  '{"en":"A transformative monetary and technological treatise exploring the tokenization of real-world assets (RWA) across Africa. Professor Kelly Mua Kingsly demonstrates how distributed ledger protocols, fractional mineral reserve backing, and sovereign asset digitization can unlock trillions in dormant capital, democratize cross-border wealth, and bypass historical liquidity constraints.","fr":"Traité monétaire et technologique novateur explorant la tokenisation des actifs réels (RWA) en Afrique. Le Professeur Kelly Mua Kingsly démontre comment les registres distribués, l’adossement aux réserves minérales et la numérisation des actifs souverains peuvent libérer des milliers de milliards de capitaux dormants et démocratiser la richesse transfrontalière."}'::jsonb,
+  'Financial Technology & Digital Trust',
+  '/images/covers/tokenization-unlocking-africa-wealth.jpeg',
+  298,
+  '2025-04-18'::date,
+  'Éditions All Access / IEM Press',
+  '[{"number":1,"title":{"en":"Microstructure of Real-World Asset (RWA) Tokenization","fr":"Microstructure de la Tokenisation des Actifs Réels"},"summary":{"en":"Technical and legal mechanics of minting fractional on-chain claims against physical real estate, infrastructure concessions, and mineral deposits.","fr":"Mécanismes techniques et juridiques de création de créances fractionnées sur la blockchain adossées à l’immobilier, aux infrastructures et aux gisements."}},{"number":2,"title":{"en":"Sovereign Mineral & Agricultural Commodity Backing","fr":"Adossement aux Matières Premières Minérales et Agricoles Souveraines"},"summary":{"en":"How Central African sovereign treasuries can tokenize strategic reserves (bauxite, cobalt, timber) to issue asset-backed liquidity notes.","fr":"Comment les trésors souverains d’Afrique centrale peuvent tokeniser des réserves stratégiques (bauxite, cobalt, bois) pour émettre des titres de liquidité adossés."}},{"number":3,"title":{"en":"Regulatory Sandboxes & Central African Digital Asset Jurisdictions","fr":"Bacs à Sable Réglementaires et Juridictions Numériques en Afrique Centrale"},"summary":{"en":"Formulates a harmonized COSUMAF/BEAC regulatory framework for tokenized securities and investor protection.","fr":"Formule un cadre réglementaire harmonisé COSUMAF/BEAC pour les titres financiers tokenisés et la protection des investisseurs."}}]'::jsonb,
+  true,
+  'published'
+)
+ON CONFLICT (slug) DO UPDATE SET
+  isbn = EXCLUDED.isbn,
+  title = EXCLUDED.title,
+  subtitle = EXCLUDED.subtitle,
+  synopsis = EXCLUDED.synopsis,
+  academic_category = EXCLUDED.academic_category,
+  cover_image_url = EXCLUDED.cover_image_url,
+  total_pages = EXCLUDED.total_pages,
+  publish_date = EXCLUDED.publish_date,
+  publisher = EXCLUDED.publisher,
+  chapters = EXCLUDED.chapters,
+  is_featured = EXCLUDED.is_featured;
+
+INSERT INTO public.book_formats (book_id, format, price_cents, currency, is_available, sku, file_storage_path)
+SELECT id, 'digital_pdf'::format_type, 3800, 'USD', true, 'KMK-TOK-PDF', 'private-books/tokenization-unlocking-africa-wealth.pdf'
+FROM public.books WHERE slug = 'tokenization-unlocking-africas-wealth';
+INSERT INTO public.book_formats (book_id, format, price_cents, currency, is_available, sku, file_storage_path)
+SELECT id, 'physical_paperback'::format_type, 4800, 'USD', true, 'KMK-TOK-PB', NULL
+FROM public.books WHERE slug = 'tokenization-unlocking-africas-wealth';
+INSERT INTO public.third_party_retailers (book_id, platform_name, retail_url, is_active)
+SELECT id, 'Amazon Global', 'https://www.amazon.com/s?k=Kelly+Kingsly+Tokenization+Africa', true
+FROM public.books WHERE slug = 'tokenization-unlocking-africas-wealth';
+INSERT INTO public.books (id, slug, isbn, title, subtitle, synopsis, academic_category, cover_image_url, total_pages, publish_date, publisher, chapters, is_featured, status)
+VALUES (
+  uuid_generate_v4(),
+  'corporate-social-responsibility-and-institutional-foresight',
+  '978-1-68526-894-7',
+  '{"en":"Corporate Social Responsibility (C.S.R.) and Institutional Foresight","fr":"Responsabilité Sociétale des Entreprises (RSE) et Prospective Institutionnelle"}'::jsonb,
+  '{"en":"A Strategic Guide for Sustainable Value Creation and Sovereign Stakeholder Governance","fr":"Un Guide Stratégique pour la Création de Valeur Durable et la Gouvernance Souveraine des Parties Prenantes"}'::jsonb,
+  '{"en":"An essential corporate governance framework connecting ESG metrics, long-range institutional foresight, and fiduciary ethics. Professor Kingsly articulates how corporate entities operating in emerging economies must harmonize shareholder profitability with ecological stewardship, community wealth creation, and sovereign compliance.","fr":"Un cadre fondamental de gouvernance d’entreprise reliant les critères ESG, la prospective institutionnelle et l’éthique fiduciaire. Le Professeur Kingsly y expose comment les entreprises en économies émergentes doivent harmoniser rentabilité financière, préservation écologique, développement communautaire et conformité souveraine."}'::jsonb,
+  'Corporate Governance & ESG',
+  '/images/covers/corporate-social-responsibility-c-s-r.jpeg',
+  324,
+  '2023-11-28'::date,
+  'Christian Faith Publishing · Corporate Governance Series',
+  '[{"number":1,"title":{"en":"Foresight Methodologies for Boardroom ESG Strategy","fr":"Méthodologies de Prospective pour la Stratégie ESG des Conseils d’Administration"},"summary":{"en":"Establishes horizon-scanning and scenario-planning models that anticipate non-financial regulatory liabilities.","fr":"Établit des modèles de veille prospective et de planification par scénarios pour anticiper les passifs réglementaires non financiers."}},{"number":2,"title":{"en":"Extractive Industries, Social License & Community Trust Capital","fr":"Industries Extractives, Permis Social d’Opérer et Capital Confiance Communautaire"},"summary":{"en":"Deconstructs resource-extraction conflicts and designs shared-value mechanisms ensuring long-term institutional stability.","fr":"Déconstruit les conflits liés à l’extraction des ressources et conçoit des mécanismes de valeur partagée garantissant la stabilité institutionnelle."}}]'::jsonb,
+  true,
+  'published'
+)
+ON CONFLICT (slug) DO UPDATE SET
+  isbn = EXCLUDED.isbn,
+  title = EXCLUDED.title,
+  subtitle = EXCLUDED.subtitle,
+  synopsis = EXCLUDED.synopsis,
+  academic_category = EXCLUDED.academic_category,
+  cover_image_url = EXCLUDED.cover_image_url,
+  total_pages = EXCLUDED.total_pages,
+  publish_date = EXCLUDED.publish_date,
+  publisher = EXCLUDED.publisher,
+  chapters = EXCLUDED.chapters,
+  is_featured = EXCLUDED.is_featured;
+
+INSERT INTO public.book_formats (book_id, format, price_cents, currency, is_available, sku, file_storage_path)
+SELECT id, 'digital_pdf'::format_type, 3400, 'USD', true, 'KMK-CSR-PDF', 'private-books/corporate-social-responsibility-csr.pdf'
+FROM public.books WHERE slug = 'corporate-social-responsibility-and-institutional-foresight';
+INSERT INTO public.book_formats (book_id, format, price_cents, currency, is_available, sku, file_storage_path)
+SELECT id, 'physical_paperback'::format_type, 4400, 'USD', true, 'KMK-CSR-PB', NULL
+FROM public.books WHERE slug = 'corporate-social-responsibility-and-institutional-foresight';
+INSERT INTO public.third_party_retailers (book_id, platform_name, retail_url, is_active)
+SELECT id, 'Amazon Global', 'https://www.amazon.com/s?k=Kelly+Kingsly+Corporate+Social+Responsibility+CSR', true
+FROM public.books WHERE slug = 'corporate-social-responsibility-and-institutional-foresight';
+INSERT INTO public.books (id, slug, isbn, title, subtitle, synopsis, academic_category, cover_image_url, total_pages, publish_date, publisher, chapters, is_featured, status)
+VALUES (
+  uuid_generate_v4(),
+  '21st-century-monetary-policy-sub-saharan-africa',
+  '978-2-487-19829-9',
+  '{"en":"21st Century Monetary Policy in Sub-Saharan Africa","fr":"Politique Monétaire du 21e Siècle en Afrique Subsaharienne"}'::jsonb,
+  '{"en":"Central Bank Autonomy, Currency Convergence, and Exogenous Shock Resilience in CEMAC and WAEMU","fr":"Autonomie des Banques Centrales, Convergence Monétaire et Résilience aux Chocs Exogènes en CEMAC et UEMOA"}'::jsonb,
+  '{"en":"A rigorous macroeconomic investigation into the institutional architecture of monetary policy across Central and West Africa. Professor Kingsly analyzes foreign exchange reserve pooling, interest rate transmission channels, inflation targeting under commodity price volatility, and the strategic path toward sovereign regional monetary independence.","fr":"Enquête macroéconomique approfondie sur l’architecture institutionnelle de la politique monétaire en Afrique centrale et de l’Ouest. Le Professeur Kingsly y analyse la mise en commun des réserves de change, la transmission des taux d’intérêt, le ciblage d’inflation face à la volatilité des matières premières et l’indépendance monétaire régionale."}'::jsonb,
+  'Sovereign Debt, PFM & Capital Markets',
+  '/images/covers/21-century-monetary-policy-in-sub-saharan-africa.jpeg',
+  368,
+  '2024-09-12'::date,
+  'Éditions All Access / IEM Press',
+  '[{"number":1,"title":{"en":"Microstructure of Central African Monetary Transmission (BEAC)","fr":"Microstructure de la Transmission Monétaire en Afrique Centrale (BEAC)"},"summary":{"en":"Analyzes liquidity absorption tenders, interbank money market depth, and key policy rate elasticity.","fr":"Analyse les opérations d’absorption de liquidité, la profondeur du marché interbancaire et l’élasticité des taux directeurs."}},{"number":2,"title":{"en":"Foreign Reserve Management and Macro-Prudential Stability","fr":"Gestion des Réserves de Change et Stabilité Macroprudentielle"},"summary":{"en":"Evaluates statutory reserve requirements, export revenue repatriation enforcement, and sovereign currency peg dynamics.","fr":"Évalue les exigences de réserves obligatoires, le rapatriement des devises d’exportation et la dynamique de parité."}},{"number":3,"title":{"en":"Central Bank Digital Currencies (CBDCs) and Sub-Regional Settlement","fr":"Monnaies Numériques de Banque Centrale (MNBC) et Compensation Sous-Régionale"},"summary":{"en":"Proposes an interoperable wholesale CBDC prototype for intra-CEMAC cross-border trade settlement.","fr":"Propose un prototype de MNBC de gros interopérable pour le règlement du commerce transfrontalier en zone CEMAC."}}]'::jsonb,
+  true,
+  'published'
+)
+ON CONFLICT (slug) DO UPDATE SET
+  isbn = EXCLUDED.isbn,
+  title = EXCLUDED.title,
+  subtitle = EXCLUDED.subtitle,
+  synopsis = EXCLUDED.synopsis,
+  academic_category = EXCLUDED.academic_category,
+  cover_image_url = EXCLUDED.cover_image_url,
+  total_pages = EXCLUDED.total_pages,
+  publish_date = EXCLUDED.publish_date,
+  publisher = EXCLUDED.publisher,
+  chapters = EXCLUDED.chapters,
+  is_featured = EXCLUDED.is_featured;
+
+INSERT INTO public.book_formats (book_id, format, price_cents, currency, is_available, sku, file_storage_path)
+SELECT id, 'digital_pdf'::format_type, 4200, 'USD', true, 'KMK-MON-PDF', 'private-books/21st-century-monetary-policy.pdf'
+FROM public.books WHERE slug = '21st-century-monetary-policy-sub-saharan-africa';
+INSERT INTO public.book_formats (book_id, format, price_cents, currency, is_available, sku, file_storage_path)
+SELECT id, 'physical_hardcover'::format_type, 5800, 'USD', true, 'KMK-MON-HC', NULL
+FROM public.books WHERE slug = '21st-century-monetary-policy-sub-saharan-africa';
+INSERT INTO public.third_party_retailers (book_id, platform_name, retail_url, is_active)
+SELECT id, 'Amazon Global', 'https://www.amazon.com/s?k=Kelly+Kingsly+21st+Century+Monetary+Policy', true
+FROM public.books WHERE slug = '21st-century-monetary-policy-sub-saharan-africa';
+INSERT INTO public.books (id, slug, isbn, title, subtitle, synopsis, academic_category, cover_image_url, total_pages, publish_date, publisher, chapters, is_featured, status)
+VALUES (
+  uuid_generate_v4(),
+  'le-financement-de-leconomie-verte',
+  '978-2-343-21948-5',
+  '{"en":"Financing the Green Economy: Green Growth is Possible","fr":"Le Financement de l’Économie Verte : La Croissance Verte est Possible"}'::jsonb,
+  '{"en":"Sovereign Green Bonds, Climate Finance, and Carbon Credit Monetization in Emerging Africa","fr":"Obligations Vertes Souveraines, Finance Climat et Monétisation des Crédits Carbone en Afrique Émergente"}'::jsonb,
+  '{"en":"Co-authored by Alain Ndedi, Kelly Mua Kingsly, and Paulin Mbecke, this landmark treatise demonstrates how African sovereign nations can mobilize international climate capital through green bond frameworks, sustainable forestry monetization in the Congo Basin, and clean energy transition financing.","fr":"Coécrit par Alain Ndedi, Kelly Mua Kingsly et Paulin Mbecke, cet ouvrage majeur démontre comment les États africains peuvent mobiliser la finance climat internationale grâce aux cadres d’obligations vertes, à la valorisation du bassin du Congo et au financement de la transition énergétique."}'::jsonb,
+  'Corporate Governance & ESG',
+  '/images/covers/le-financement-de-leconomie-verte.jpeg',
+  276,
+  '2022-03-15'::date,
+  'Éditions L’Harmattan / IEM Press',
+  '[{"number":1,"title":{"en":"Sovereign Green Bond Taxonomy and Blended Finance Frameworks","fr":"Taxonomie des Obligations Vertes Souveraines et Mécanismes de Financement Mixte"},"summary":{"en":"Aligns CEMAC sovereign debt issuances with ICMA Green Bond Principles and climate risk disclosures.","fr":"Harmonise les émissions de dette souveraine en CEMAC avec les principes ICMA et les obligations d’information climatique."}},{"number":2,"title":{"en":"Congo Basin Forest Assets and Article 6 Carbon Credit Markets","fr":"Patrimoine Forestier du Bassin du Congo et Marchés Carbone de l’Article 6"},"summary":{"en":"Technical mechanisms for sovereign carbon credit verification, sovereign registry sovereignty, and international offset revenue capture.","fr":"Mécanismes techniques de certification carbone, de souveraineté des registres nationaux et de captation des revenus de compensation."}}]'::jsonb,
+  false,
+  'published'
+)
+ON CONFLICT (slug) DO UPDATE SET
+  isbn = EXCLUDED.isbn,
+  title = EXCLUDED.title,
+  subtitle = EXCLUDED.subtitle,
+  synopsis = EXCLUDED.synopsis,
+  academic_category = EXCLUDED.academic_category,
+  cover_image_url = EXCLUDED.cover_image_url,
+  total_pages = EXCLUDED.total_pages,
+  publish_date = EXCLUDED.publish_date,
+  publisher = EXCLUDED.publisher,
+  chapters = EXCLUDED.chapters,
+  is_featured = EXCLUDED.is_featured;
+
+INSERT INTO public.book_formats (book_id, format, price_cents, currency, is_available, sku, file_storage_path)
+SELECT id, 'digital_pdf'::format_type, 3200, 'USD', true, 'KMK-GRE-PDF', 'private-books/financement-economie-verte.pdf'
+FROM public.books WHERE slug = 'le-financement-de-leconomie-verte';
+INSERT INTO public.book_formats (book_id, format, price_cents, currency, is_available, sku, file_storage_path)
+SELECT id, 'physical_paperback'::format_type, 4200, 'USD', true, 'KMK-GRE-PB', NULL
+FROM public.books WHERE slug = 'le-financement-de-leconomie-verte';
+INSERT INTO public.third_party_retailers (book_id, platform_name, retail_url, is_active)
+SELECT id, 'Éditions L’Harmattan (Paris)', 'https://www.editions-harmattan.fr', true
+FROM public.books WHERE slug = 'le-financement-de-leconomie-verte';
+INSERT INTO public.books (id, slug, isbn, title, subtitle, synopsis, academic_category, cover_image_url, total_pages, publish_date, publisher, chapters, is_featured, status)
+VALUES (
+  uuid_generate_v4(),
+  'rethinking-the-global-health-care-system',
+  '978-1-68526-941-8',
+  '{"en":"Rethinking the Global Health Care System","fr":"Repenser le Système Mondial de Santé"}'::jsonb,
+  '{"en":"Health Economics, Sovereign Pandemic Preparedness, and Universal Health Coverage in the Global South","fr":"Économie de la Santé, Préparation Souveraine aux Pandémies et Couverture Santé Universelle au Sud"}'::jsonb,
+  '{"en":"An incisive health economics treatise examining healthcare financing fragilities, hospital infrastructure expenditure, and sovereign fiscal buffers. Professor Kingsly formulates sustainable domestic resource mobilization models to finance universal health coverage without exacerbating sovereign debt vulnerabilities.","fr":"Traité incisif d’économie de la santé examinant les fragilités de financement des soins, les dépenses d’infrastructure hospitalière et les amortisseurs budgétaires souverains. Le Professeur Kingsly y formule des modèles de mobilisation des ressources domestiques pour financer la couverture universelle sans compromettre la soutenabilité de la dette."}'::jsonb,
+  'Sovereign Debt, PFM & Capital Markets',
+  '/images/covers/rethining-the-global-health-care-system.jpeg',
+  318,
+  '2023-08-10'::date,
+  'Christian Faith Publishing · Public Policy Series',
+  '[{"number":1,"title":{"en":"Fiscal Space for Healthcare: Domestic Resource Mobilization vs. External Concessional Loans","fr":"Espace Budgétaire pour la Santé : Ressources Domestiques vs. Prêts Concessionnels"},"summary":{"en":"Evaluates tax-funded healthcare architectures, earmarked sovereign levies, and public expenditure efficiency.","fr":"Évalue les modèles de financement fiscal, les prélèvements affectés et l’efficacité de la dépense publique."}},{"number":2,"title":{"en":"Sovereign Contingency Funds & Supply Chain Sovereignty During Biological Crises","fr":"Fonds de Prévoyance Souverains et Souveraineté Logistique en Période de Crise"},"summary":{"en":"Designing national emergency health contingency reserves and strategic medical stockpiles.","fr":"Conception des réserves budgétaires d’urgence sanitaire et des stocks médicaux stratégiques."}}]'::jsonb,
+  false,
+  'published'
+)
+ON CONFLICT (slug) DO UPDATE SET
+  isbn = EXCLUDED.isbn,
+  title = EXCLUDED.title,
+  subtitle = EXCLUDED.subtitle,
+  synopsis = EXCLUDED.synopsis,
+  academic_category = EXCLUDED.academic_category,
+  cover_image_url = EXCLUDED.cover_image_url,
+  total_pages = EXCLUDED.total_pages,
+  publish_date = EXCLUDED.publish_date,
+  publisher = EXCLUDED.publisher,
+  chapters = EXCLUDED.chapters,
+  is_featured = EXCLUDED.is_featured;
+
+INSERT INTO public.book_formats (book_id, format, price_cents, currency, is_available, sku, file_storage_path)
+SELECT id, 'digital_pdf'::format_type, 3600, 'USD', true, 'KMK-HEA-PDF', 'private-books/rethinking-global-healthcare.pdf'
+FROM public.books WHERE slug = 'rethinking-the-global-health-care-system';
+INSERT INTO public.book_formats (book_id, format, price_cents, currency, is_available, sku, file_storage_path)
+SELECT id, 'physical_paperback'::format_type, 4600, 'USD', true, 'KMK-HEA-PB', NULL
+FROM public.books WHERE slug = 'rethinking-the-global-health-care-system';
+INSERT INTO public.third_party_retailers (book_id, platform_name, retail_url, is_active)
+SELECT id, 'Amazon Global', 'https://www.amazon.com/s?k=Kelly+Kingsly+Rethinking+Global+Healthcare', true
+FROM public.books WHERE slug = 'rethinking-the-global-health-care-system';
+INSERT INTO public.books (id, slug, isbn, title, subtitle, synopsis, academic_category, cover_image_url, total_pages, publish_date, publisher, chapters, is_featured, status)
+VALUES (
+  uuid_generate_v4(),
+  'kingdom-vision-new-vision-for-africas-economic-future',
+  '978-2-487-19830-5',
+  '{"en":"Kingdom Vision: A New Vision for Africa’s Economic Future","fr":"Vision du Royaume : Une Nouvelle Vision pour l’Avenir Économique de l’Afrique"}'::jsonb,
+  '{"en":"Ethical Statecraft, Generational Leadership, and Endogenous Industrialization","fr":"Gouvernance Éthique, Leadership Générationnel et Industrialisation Endogène"}'::jsonb,
+  '{"en":"A visionary socio-economic and ethical manifesto challenging historical structural dependencies. Professor Kelly Mua Kingsly charts a paradigm of self-reliant industrialization, agricultural transformation, and incorruptible governance anchored in generational trust capital and pan-African institutional sovereignty.","fr":"Manifeste socio-économique et éthique visionnaire remettant en cause les dépendances structurelles historiques. Le Professeur Kelly Mua Kingsly y trace un paradigme d’industrialisation endogène, de transformation agricole et de gouvernance intègre ancrée dans le capital confiance générationnel."}'::jsonb,
+  'Financial Technology & Digital Trust',
+  '/images/covers/kingdom-vision.jpeg',
+  288,
+  '2025-02-20'::date,
+  'Éditions All Access / IEM Press',
+  '[{"number":1,"title":{"en":"Deconstructing Structural Dependency: The Call for Endogenous Industrial Policy","fr":"Déconstruire la Dépendance Structurelle : Pour une Politique Industrielle Endogène"},"summary":{"en":"Rethinking Bretton Woods conditionality and formulating homegrown industrial acceleration policies.","fr":"Repenser la conditionnalité de Bretton Woods et formuler des politiques d’accélération industrielle endogènes."}},{"number":2,"title":{"en":"Generational Ethics, Moral Authority & Institutional Renewal in Statecraft","fr":"Éthique Générationnelle, Autorité Morale et Renouveau Institutionnel de l’État"},"summary":{"en":"Cultivating ethical leadership in public financial management and sovereign asset stewardship.","fr":"Cultiver un leadership éthique dans la gestion des finances publiques et la gouvernance des actifs de l’État."}}]'::jsonb,
+  false,
+  'published'
+)
+ON CONFLICT (slug) DO UPDATE SET
+  isbn = EXCLUDED.isbn,
+  title = EXCLUDED.title,
+  subtitle = EXCLUDED.subtitle,
+  synopsis = EXCLUDED.synopsis,
+  academic_category = EXCLUDED.academic_category,
+  cover_image_url = EXCLUDED.cover_image_url,
+  total_pages = EXCLUDED.total_pages,
+  publish_date = EXCLUDED.publish_date,
+  publisher = EXCLUDED.publisher,
+  chapters = EXCLUDED.chapters,
+  is_featured = EXCLUDED.is_featured;
+
+INSERT INTO public.book_formats (book_id, format, price_cents, currency, is_available, sku, file_storage_path)
+SELECT id, 'digital_pdf'::format_type, 3000, 'USD', true, 'KMK-KIN-PDF', 'private-books/kingdom-vision.pdf'
+FROM public.books WHERE slug = 'kingdom-vision-new-vision-for-africas-economic-future';
+INSERT INTO public.book_formats (book_id, format, price_cents, currency, is_available, sku, file_storage_path)
+SELECT id, 'physical_paperback'::format_type, 4000, 'USD', true, 'KMK-KIN-PB', NULL
+FROM public.books WHERE slug = 'kingdom-vision-new-vision-for-africas-economic-future';
+INSERT INTO public.third_party_retailers (book_id, platform_name, retail_url, is_active)
+SELECT id, 'Amazon Global', 'https://www.amazon.com/s?k=Kelly+Kingsly+Kingdom+Vision', true
+FROM public.books WHERE slug = 'kingdom-vision-new-vision-for-africas-economic-future';
 
 -- 2. POLICY BRIEFS & WORKING PAPERS (4 Briefs)
 INSERT INTO public.blog_posts (id, slug, title, excerpt, content_markdown, cover_image_url, category, tags, estimated_read_minutes, doi_reference, status)

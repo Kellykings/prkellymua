@@ -33,9 +33,9 @@ describe('Admin Studio E2E Data Wiring & Integrity', () => {
   beforeEach(() => {
     saveContentOverrides(CLEAN_STORE);
   });
-  it('should wire all 11 monographic volumes to the admin studio inventory', async () => {
+  it('should wire all 17 monographic volumes to the admin studio inventory', async () => {
     const books = await getBooks();
-    expect(books).toHaveLength(11);
+    expect(books).toHaveLength(17);
 
     for (const book of books) {
       expect(book.id).toBeTruthy();

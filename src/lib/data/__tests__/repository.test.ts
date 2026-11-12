@@ -93,9 +93,9 @@ describe('Data Repository — Gallery & Events', () => {
 });
 
 describe('Data Repository — Monographic Books Catalog', () => {
-  it('should return 11 reference books in reverse chronological order', async () => {
+  it('should return 17 reference books in reverse chronological order', async () => {
     const books = await getBooks();
-    expect(books.length).toBe(11);
+    expect(books.length).toBe(17);
 
     for (let i = 0; i < books.length - 1; i++) {
       const currentYear = parseInt(books[i].publish_date.split('-')[0], 10);

@@ -65,10 +65,10 @@ describe('Academic Track Filtering for Books Catalog', () => {
     const sovereignDebt = SEED_BOOKS.filter((b) => getBookTrack(b.academic_category) === 'sovereign_debt');
 
     expect(forensics.length).toBe(5);
-    expect(capitalMarkets.length).toBe(2);
-    expect(riskTech.length).toBe(2);
-    expect(sovereignDebt.length).toBe(2);
-    expect(forensics.length + capitalMarkets.length + riskTech.length + sovereignDebt.length).toBe(11);
+    expect(capitalMarkets.length).toBe(4);
+    expect(riskTech.length).toBe(4);
+    expect(sovereignDebt.length).toBe(4);
+    expect(forensics.length + capitalMarkets.length + riskTech.length + sovereignDebt.length).toBe(17);
   });
 });
 
