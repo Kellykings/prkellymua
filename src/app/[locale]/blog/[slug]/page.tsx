@@ -2,7 +2,7 @@ import React from 'react';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import type { Metadata } from 'next';
-import { ArrowLeft, Calendar, Clock, Tag } from 'lucide-react';
+import { ArrowLeft, Calendar, Clock, Tag, FileDown } from 'lucide-react';
 import { getBlogPostBySlug } from '@/lib/data/repository';
 import { CitationExporter } from '@/components/shared/CitationExporter';
 import { formatCategory, formatDate, t } from '@/lib/utils';
@@ -190,9 +190,33 @@ export default async function BlogPostDetailPage({
           {renderWithAbbr(excerpt, locale)}
         </p>
 
-        <div className="pt-2 text-xs text-navy-800">
-          {locale === 'fr' ? 'Auteur :' : 'Author:'}{' '}
-          <strong>Professor Kelly Mua Kingsly, PhD, CFA</strong>
+        <div className="pt-2 flex flex-wrap items-center justify-between gap-4 text-xs text-navy-800">
+          <div>
+            {locale === 'fr' ? 'Auteur :' : 'Author:'}{' '}
+            <strong>Professor Kelly Mua Kingsly, PhD, CFA</strong>
+          </div>
+
+          {post.pdf_download_url && (
+            <a
+              href={post.pdf_download_url}
+              download
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-4 py-2 bg-navy-900 text-gold-400 hover:bg-bronze-600 hover:text-white transition-colors font-semibold uppercase tracking-[0.06em] shadow-sm rounded-sm"
+            >
+              <FileDown className="w-4 h-4" />
+              <span>
+                {locale === 'fr'
+                  ? 'Télécharger la Note Complète (PDF)'
+                  : 'Download Full Working Paper (PDF)'}
+              </span>
+              {post.pages && (
+                <span className="text-[11px] opacity-80 pl-1.5 border-l border-current/30">
+                  {post.pages} {locale === 'fr' ? 'p.' : 'pages'}
+                </span>
+              )}
+            </a>
+          )}
         </div>
       </header>
 

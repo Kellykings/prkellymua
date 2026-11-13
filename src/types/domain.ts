@@ -73,6 +73,8 @@ export interface BlogPost {
   doi_reference?: string;
   published_at: string;
   status: 'draft' | 'in_review' | 'published' | 'archived';
+  pdf_download_url?: string;
+  pages?: number;
 }
 
 export interface CareerEntry {

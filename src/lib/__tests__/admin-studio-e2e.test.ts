@@ -49,7 +49,7 @@ describe('Admin Studio E2E Data Wiring & Integrity', () => {
 
   it('should wire all bilingual policy briefs to the publications table', async () => {
     const posts = await getBlogPosts();
-    expect(posts).toHaveLength(4);
+    expect(posts).toHaveLength(41);
 
     for (const post of posts) {
       expect(post.title.en).toBeTruthy();
@@ -58,6 +58,7 @@ describe('Admin Studio E2E Data Wiring & Integrity', () => {
       expect(post.excerpt.fr).toBeTruthy();
       expect(post.category).toBeTruthy();
       expect(post.status).toBe('published');
+      expect(post.pdf_download_url).toMatch(/^\/documents\/policy-briefs\/.*\.pdf$/);
     }
   });
 

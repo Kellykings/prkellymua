@@ -1,7 +1,7 @@
 import React from 'react';
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { FileText, ArrowRight, Search, X, RotateCcw } from 'lucide-react';
+import { FileText, ArrowRight, Search, X, RotateCcw, Download } from 'lucide-react';
 import { getBlogPosts } from '@/lib/data/repository';
 import { formatCategory, formatDate, t } from '@/lib/utils';
 import type { Locale } from '@/types/domain';
@@ -340,6 +340,15 @@ export default async function BlogIndexPage({
                       <span>Ref. {post.doi_reference}</span>
                     </>
                   )}
+                  {post.pdf_download_url && (
+                    <>
+                      <span aria-hidden="true">·</span>
+                      <span className="inline-flex items-center gap-1 font-semibold text-bronze-600">
+                        <Download className="w-3 h-3" />
+                        <span>PDF {post.pages ? `(${post.pages}p)` : ''}</span>
+                      </span>
+                    </>
+                  )}
                 </div>
 
                 <h2 className="text-2xl font-serif font-semibold text-navy-900">
@@ -368,18 +377,34 @@ export default async function BlogIndexPage({
                   ))}
                 </div>
 
-                <Link
-                  href={`/${locale}/blog/${post.slug}`}
-                  className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-navy-900 hover:text-bronze-600 transition-colors"
-                >
-                  <FileText className="w-4 h-4" />
-                  <span>
-                    {locale === 'fr'
-                      ? 'Lire la note complète'
-                      : 'Read full policy brief'}
-                  </span>
-                  <ArrowRight className="w-4 h-4" />
-                </Link>
+                <div className="flex items-center gap-4">
+                  {post.pdf_download_url && (
+                    <a
+                      href={post.pdf_download_url}
+                      download
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-bronze-600 hover:text-navy-900 transition-colors"
+                      title={locale === 'fr' ? 'Télécharger la note en PDF' : 'Download working paper PDF'}
+                    >
+                      <Download className="w-3.5 h-3.5" />
+                      <span>PDF</span>
+                    </a>
+                  )}
+
+                  <Link
+                    href={`/${locale}/blog/${post.slug}`}
+                    className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-navy-900 hover:text-bronze-600 transition-colors"
+                  >
+                    <FileText className="w-4 h-4" />
+                    <span>
+                      {locale === 'fr'
+                        ? 'Lire la note complète'
+                        : 'Read full policy brief'}
+                    </span>
+                    <ArrowRight className="w-4 h-4" />
+                  </Link>
+                </div>
               </div>
             </article>
           ))}

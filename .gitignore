@@ -16,6 +16,10 @@
 # misc
 .DS_Store
 *.pem
+~$*.docx
+~$*.doc
+__pycache__/
+*.pyc
 
 # debug
 npm-debug.log*
