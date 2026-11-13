@@ -26,7 +26,7 @@ export const dictionaries = {
       eyebrow: 'SOVEREIGN FINANCE · GOVERNANCE · DEVELOPMENT',
       headline: 'Sovereign finance and governance for Africa’s development.',
       subheadline:
-        'Professor Kelly Mua Kingsly (PhD, CFA) is a finance engineer and climate finance specialist working where sovereign treasury execution meets multilateral risk governance and forensic investigation. Chair of the Board of ATIDI and Director of State Finance Operations, he brings practitioner rigor and academic depth to engagements with UNDP-EU, UNCTAD, BEAC-CPC-TP and COSUMAF.',
+        'Professor Kelly Mua Kingsly is a finance engineer and climate finance specialist working where sovereign treasury execution meets multilateral risk governance and forensic investigation. Bringing executive leadership and three decades of practitioner rigor, he structures resilient financial architectures, guides sustainable capital mobilization, and directs advanced forensic oversight to safeguard public resources and accelerate economic transformation.',
       ctaPrimary: 'Browse books',
       ctaSecondary: 'About the Professor',
       independenceText: 'Independent academic website. Not an official channel of any government body or institution.',
@@ -107,7 +107,7 @@ export const dictionaries = {
       eyebrow: 'FINANCE SOUVERAINE · GOUVERNANCE · DÉVELOPPEMENT',
       headline: 'Finance souveraine et gouvernance au service du développement de l’Afrique.',
       subheadline:
-        'Le Professeur Kelly Mua Kingsly (PhD, CFA) est ingénieur financier et spécialiste de la finance climat. Il intervient là où l’exécution de la trésorerie de l’État rejoint la gouvernance des risques multilatéraux et les enquêtes forensiques. Président du Conseil d’administration de l’ATIDI et Directeur des Opérations financières de l’État, il met sa rigueur de praticien et sa profondeur académique au service de ses échanges avec le PNUD-UE, la CNUCED, la BEAC-CPC-TP et la COSUMAF.',
+        'Le Professeur Kelly Mua Kingsly est ingénieur financier et spécialiste de la finance climat, intervenant à la croisée de l’exécution de la trésorerie souveraine, de la gouvernance des risques multilatéraux et de l’investigation forensique. Fort d’un leadership reconnu et de trois décennies de rigueur opérationnelle, il conçoit des architectures financières résilientes, guide la mobilisation de capitaux durables et pilote des dispositifs avancés de contrôle pour préserver les ressources publiques et accélérer la transformation économique.',
       ctaPrimary: 'Parcourir les ouvrages',
       ctaSecondary: 'À propos du Professeur',
       independenceText: 'Site académique indépendant. Ne constitue le canal officiel d’aucun organisme public ni d’aucune institution.',
